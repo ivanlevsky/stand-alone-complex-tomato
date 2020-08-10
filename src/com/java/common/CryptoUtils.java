@@ -6,12 +6,17 @@ import com.google.common.io.Files;
 import java.io.File;
 import java.io.IOException;
 
-public class cryptoUtils {
+public class CryptoUtils {
     public static void main(String[] args) {
         String pathname = "";
 //		System.out.println(fileCheckSum(pathname,"crc32"));
-//		encode();
+		encode("胜多负少");
+
     }
+
+	private static void encode(String string) {
+//		System.out.println(Byte.string.getBytes());
+	}
 
 	@Deprecated // md5(), sha1() deprecate
 	@SuppressWarnings("UnstableApiUsage") //remove this annotation in guava future update
