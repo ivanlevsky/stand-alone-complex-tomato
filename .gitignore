@@ -25,3 +25,9 @@ hs_err_pid*
 #
 /.idea/
 stand-alone-complex-tomato.iml
+/test file/aap*
+/test file/weblist.properties
+/test file/*.txt
+/test file/chromedriver/*
+/test file/datasets/
+/test file/appium/
