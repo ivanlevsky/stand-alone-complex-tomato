@@ -29,7 +29,7 @@ public class WindowsOsUtils {
                 BufferedReader reader=new BufferedReader(new InputStreamReader(
                         process.getInputStream(), charset));
                 while((line = reader.readLine()) != null) {
-                    output.append(line).append("\r\n");
+                    output.append(line).append(System.lineSeparator());
                 }
                 reader.close();
             }
@@ -56,7 +56,7 @@ public class WindowsOsUtils {
             out.flush();
             out.close();
             while ((line = in.readLine()) != null) {
-                output.append(line).append("\r\n");
+                output.append(line).append(System.lineSeparator());
             }
             in.close();
             process.destroy();
