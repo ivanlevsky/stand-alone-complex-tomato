@@ -1,6 +1,9 @@
 package com.java.common.filesystem;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 public class WindowsOsUtils {
@@ -17,12 +20,17 @@ public class WindowsOsUtils {
         }
     }
 
-    public static String getCommandOutput(String cmd){
+    public static String getCommandOutput(String... cmd){
         StringBuilder output = new StringBuilder();
         String charset = Locale.getDefault().toString().equals("zh_CN")?"GBK":"UTF-8";
         try {
             ProcessBuilder processBuilder = new ProcessBuilder();
-            processBuilder.command("cmd","/c", cmd);
+            List<String> nc = new ArrayList<>();
+            nc.add("cmd");
+            nc.add("/c");
+            nc.addAll(Arrays.asList(cmd));
+
+            processBuilder.command(nc);
             Process process = processBuilder.start();
             String line;
             if(process.waitFor() == 0){

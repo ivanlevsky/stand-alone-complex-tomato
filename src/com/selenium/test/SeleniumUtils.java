@@ -34,7 +34,7 @@ public class SeleniumUtils {
         driver.manage().window().maximize();
     }
 
-    static void waitForPageFullLoaded(WebDriver driver, int ...maxTimeOut){
+    static void waitForPageFullLoaded(WebDriver driver, int... maxTimeOut){
         int defaultTimeout = 10;
         if(maxTimeOut.length != 0) {
             defaultTimeout = maxTimeOut[0];

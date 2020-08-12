@@ -15,7 +15,7 @@ public class ConfigUtils {
         readConfFile(GlobalParams.confPath2);
     }
 
-    static Object readConfFile(String confFile, String ...sectionOption) {
+    static Object readConfFile(String confFile, String... sectionOption) {
         LinkedHashMap<String, Properties> result = new LinkedHashMap<>();
         try {
             new Properties() {
@@ -88,7 +88,7 @@ public class ConfigUtils {
 
     //warning: new insert key and value not in right order now!!
     public static void addConfOptionsBySection(LinkedHashMap<String, Properties> config, String section,
-                                               String  ...keyAndValues){
+                                               String... keyAndValues){
         Properties sectionNew = new Properties();
         if(keyAndValues.length == 0){
             config.put(section,sectionNew);
