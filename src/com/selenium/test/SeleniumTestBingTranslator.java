@@ -1,5 +1,6 @@
 package com.selenium.test;
 
+import com.java.common.GlobalParams;
 import com.java.common.filesystem.WindowsOsUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -14,6 +15,7 @@ public class SeleniumTestBingTranslator {
         SeleniumUtils.waitForPageFullLoaded(driver);
         selectLanguage(driver, "en", "zh-Hans");
         sendTranslateText(driver, "what are you doing");
+        SeleniumUtils.saveScreenShot(driver, GlobalParams.testImagePath, "translate result screenshot.png");
         SeleniumUtils.closeDriver(driver);
     }
 

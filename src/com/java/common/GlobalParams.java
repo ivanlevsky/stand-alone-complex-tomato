@@ -3,11 +3,11 @@ package com.java.common;
 public class GlobalParams {
     private static String projectPath = System.getProperty("user.dir");
     private static String confPath = projectPath+"\\test file\\cf.cfg";
-    static String confPath2 = projectPath+"\\test file\\cf2.cfg";
     private static String sectionTestPath = "testPath";
     private static String sectionOpencvUtils = "opencvUtils";
     private static String sectionMachineLearning = "machineLearning";
     private static String sectionAppium = "appium";
+    private static String sectionSelenium = "selenium";
 
 //    public static String testImagePath;
 //    public static String testVideoPath;
@@ -56,5 +56,10 @@ public class GlobalParams {
     public static String appiumScreenrecordPath = projectPath + ConfigUtils.readConfFile(confPath, sectionAppium,
             "appiumScreenrecordPath");
     public static String qrCodeImagePath = projectPath + ConfigUtils.readConfFile(confPath, sectionAppium, "qrCodeImagePath");
+
+    //selenium section
+    public static String chromeDriverPath = projectPath + ConfigUtils.readConfFile(confPath, sectionSelenium, "chromeDriverPath");
+    public static String edgeDriverPath = projectPath + ConfigUtils.readConfFile(confPath, sectionSelenium, "edgeDriverPath");
+    public static String ieDriverPath =  projectPath + ConfigUtils.readConfFile(confPath, sectionSelenium, "edgeDriverPath");
 
 }

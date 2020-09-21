@@ -12,7 +12,7 @@ public class ConfigUtils {
 //        for (String s: result.keySet()){
 //            System.out.println(s+result.get(s));
 //        }
-        readConfFile(GlobalParams.confPath2);
+//        readConfFile(GlobalParams.confPath2);
     }
 
     static Object readConfFile(String confFile, String... sectionOption) {
