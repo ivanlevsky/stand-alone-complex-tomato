@@ -60,6 +60,7 @@ public class GlobalParams {
     //selenium section
     public static String chromeDriverPath = projectPath + ConfigUtils.readConfFile(confPath, sectionSelenium, "chromeDriverPath");
     public static String edgeDriverPath = projectPath + ConfigUtils.readConfFile(confPath, sectionSelenium, "edgeDriverPath");
-    public static String ieDriverPath =  projectPath + ConfigUtils.readConfFile(confPath, sectionSelenium, "edgeDriverPath");
+    public static String ieDriverPath =  projectPath + ConfigUtils.readConfFile(confPath, sectionSelenium, "ieDriverPath");
+    public static String chromiumPath = "" + ConfigUtils.readConfFile(confPath, sectionSelenium, "chromiumPath");
 
 }

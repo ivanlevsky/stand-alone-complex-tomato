@@ -5,6 +5,8 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -27,6 +29,9 @@ public class SeleniumUtils {
 
     static WebDriver initDriver(String browserType, String... driverPath){
         if(browserType.equals("edge")) {
+            if(driverPath.length != 0){
+                System.setProperty("webdriver.edge.driver", driverPath[0]);
+            }
             return new EdgeDriver();
         }
         if(browserType.equals("chrome")){
@@ -37,10 +42,20 @@ public class SeleniumUtils {
             prefs.put("credentials_enable_service", false);
             prefs.put("profile.password_manager_enabled", false);
             chromeOptions.setExperimentalOption("prefs", prefs);
+            chromeOptions.setBinary("D:/Program Files/chromium/chrome.exe");
             if(driverPath.length != 0){
                 System.setProperty("webdriver.chrome.driver", driverPath[0]);
             }
             return new ChromeDriver(chromeOptions);
+        }
+        if(browserType.equals("ie")){
+            InternetExplorerOptions ieOptions = new InternetExplorerOptions();
+            ieOptions.introduceFlakinessByIgnoringSecurityDomains();
+            ieOptions.ignoreZoomSettings();
+            if(driverPath.length != 0){
+                System.setProperty("webdriver.ie.driver", driverPath[0]);
+            }
+            return new InternetExplorerDriver(ieOptions);
         }
         return null;
     }
@@ -176,20 +191,20 @@ public class SeleniumUtils {
     }
 
 
-//    public static WebElement findElementsByXpath(WebDriver driver,String xpath){
-//        List<WebElement> elements = driver.findElements(By.xpath(xpath));
-//        try {
-//            if(elements.size() == 0){
-//                throw new Exception("could not find xpath element !!");
-//            }else if(elements.size()>1){
-//                throw new Exception("too many xpath elements !!");
-//            }
-//
-//        } catch (Exception e) {
-//            System.out.println("xpath elements number:"+elements.size());
-//        }
-//        return elements.get(0);
-//    }
+    public static WebElement findElementsByXpath(WebDriver driver,String xpath){
+        List<WebElement> elements = driver.findElements(By.xpath(xpath));
+        try {
+            if(elements.size() == 0){
+                throw new Exception("could not find xpath element !!");
+            }else if(elements.size()>1){
+                throw new Exception("too many xpath elements !!");
+            }
+
+        } catch (Exception e) {
+            System.out.println("xpath elements number:"+elements.size());
+        }
+        return elements.get(0);
+    }
 //
 //    public static void navigateCommand(WebDriver driver, String command, String parameter){
 //        switch (command) {
