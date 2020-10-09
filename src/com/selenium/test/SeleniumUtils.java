@@ -13,7 +13,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class SeleniumUtils {
@@ -23,7 +25,7 @@ public class SeleniumUtils {
 
     }
 
-    static WebDriver initDriver(String browserType){
+    static WebDriver initDriver(String browserType, String... driverPath){
         if(browserType.equals("edge")) {
             return new EdgeDriver();
         }
@@ -31,7 +33,13 @@ public class SeleniumUtils {
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
             chromeOptions.setExperimentalOption("useAutomationExtension", false);
-//            System.setProperty("webdriver.chrome.driver", String.valueOf(driverPath));
+            Map<String, Object> prefs = new HashMap<>();
+            prefs.put("credentials_enable_service", false);
+            prefs.put("profile.password_manager_enabled", false);
+            chromeOptions.setExperimentalOption("prefs", prefs);
+            if(driverPath.length != 0){
+                System.setProperty("webdriver.chrome.driver", driverPath[0]);
+            }
             return new ChromeDriver(chromeOptions);
         }
         return null;
@@ -110,6 +118,17 @@ public class SeleniumUtils {
         );
     }
 
+    public static void waitForElementAppeard(WebDriver driver, WebElement element, int... maxTimeOut){
+        int defaultTimeout = 10;
+        if(maxTimeOut.length != 0) {
+            defaultTimeout = maxTimeOut[0];
+        }
+        new WebDriverWait(driver, defaultTimeout).until(
+                ExpectedConditions.visibilityOf(element)
+        );
+    }
+
+
     public static void waitForElementToBeClickable(WebDriver driver, String elementXpath, int... maxTimeOut){
         int defaultTimeout = 10;
         if(maxTimeOut.length != 0) {
@@ -118,6 +137,26 @@ public class SeleniumUtils {
         new WebDriverWait(driver, defaultTimeout).until(
                 ExpectedConditions.elementToBeClickable(By.xpath(elementXpath))
         ).click();
+    }
+
+    public static void waitForFrameAndSwitchToFrame(WebDriver driver, String frameName, int... maxTimeOut) {
+        int defaultTimeout = 10;
+        if(maxTimeOut.length != 0) {
+            defaultTimeout = maxTimeOut[0];
+        }
+        new WebDriverWait(driver, defaultTimeout).until(
+                ExpectedConditions.frameToBeAvailableAndSwitchToIt(frameName)
+        );
+    }
+
+    public static void waitForElementExist(WebDriver driver, String elementXpath, int... maxTimeOut) {
+        int defaultTimeout = 10;
+        if(maxTimeOut.length != 0) {
+            defaultTimeout = maxTimeOut[0];
+        }
+        new WebDriverWait(driver, defaultTimeout).until(
+                ExpectedConditions.presenceOfElementLocated(By.xpath(elementXpath))
+        );
     }
 
     public static WebElement findElementByXpath(WebDriver driver, String xpath){
@@ -136,49 +175,38 @@ public class SeleniumUtils {
         return driver.findElement(By.className(className));
     }
 
-    public static void elementAction(WebDriver driver,String xpathValue, String function,String functionParam,int timeOuts){
-        WebDriverWait wait=new WebDriverWait(driver, timeOuts);
-        WebElement waitElement =  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathValue)));
-        if(function.equals("click")){
-            waitElement.click();
-        }else if(function.equals("sendKeys")){
-            waitElement.sendKeys(functionParam);
-        }
 
-    }
-
-
-    public static WebElement findElementsByXpath(WebDriver driver,String xpath){
-        List<WebElement> elements = driver.findElements(By.xpath(xpath));
-        try {
-            if(elements.size() == 0){
-                throw new Exception("could not find xpath element !!");
-            }else if(elements.size()>1){
-                throw new Exception("too many xpath elements !!");
-            }
-
-        } catch (Exception e) {
-            System.out.println("xpath elements number:"+elements.size());
-        }
-        return elements.get(0);
-    }
-
-    public static void navigateCommand(WebDriver driver, String command, String parameter){
-        switch (command) {
-            case "to":
-                driver.navigate().to(parameter);
-                break;
-            case "back":
-                driver.navigate().back();
-                break;
-            case "forward":
-                driver.navigate().forward();
-                break;
-            case "refresh":
-                driver.navigate().refresh();
-                break;
-        }
-
-    }
+//    public static WebElement findElementsByXpath(WebDriver driver,String xpath){
+//        List<WebElement> elements = driver.findElements(By.xpath(xpath));
+//        try {
+//            if(elements.size() == 0){
+//                throw new Exception("could not find xpath element !!");
+//            }else if(elements.size()>1){
+//                throw new Exception("too many xpath elements !!");
+//            }
+//
+//        } catch (Exception e) {
+//            System.out.println("xpath elements number:"+elements.size());
+//        }
+//        return elements.get(0);
+//    }
+//
+//    public static void navigateCommand(WebDriver driver, String command, String parameter){
+//        switch (command) {
+//            case "to":
+//                driver.navigate().to(parameter);
+//                break;
+//            case "back":
+//                driver.navigate().back();
+//                break;
+//            case "forward":
+//                driver.navigate().forward();
+//                break;
+//            case "refresh":
+//                driver.navigate().refresh();
+//                break;
+//        }
+//
+//    }
 }
 
