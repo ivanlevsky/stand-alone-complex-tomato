@@ -41,9 +41,9 @@ public class GlobalParams {
     public static String ieDriverPath =  projectPath + ConfigUtils.readConfFile(confPath, sectionSelenium, "ieDriverPath");
     public static String chromiumPath = "" + ConfigUtils.readConfFile(confPath, sectionSelenium, "chromiumPath");
 
-    //database section
-    public static String mariaDbJdbcUrl = projectPath + ConfigUtils.readConfFile(confPath, sectionDatabases, "mariaDbJdbcUrl");
-    public static String mariaDbJdbcUser = projectPath + ConfigUtils.readConfFile(confPath, sectionDatabases, "mariaDbJdbcUser");
-    public static String mariaDbJdbcPassword = projectPath + ConfigUtils.readConfFile(confPath, sectionDatabases, "mariaDbJdbcPassword");
+    //databases section
+    public static String mariaDbUrl = "" + ConfigUtils.readConfFile(confPath, sectionDatabases, "mariaDbUrl");
+    public static String mariaDbUser = ""  + ConfigUtils.readConfFile(confPath, sectionDatabases, "mariaDbUser");
+    public static String mariaDbPassword = ""  + ConfigUtils.readConfFile(confPath, sectionDatabases, "mariaDbPassword");
 
 }

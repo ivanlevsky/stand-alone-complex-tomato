@@ -3,7 +3,7 @@ package com.databases;
 import java.sql.*;
 import java.util.Properties;
 
-public class JDBCUtils {
+public class DatabaseUtils {
     public static void main(String[] args) {
         Connection con = connectToDatabases("jdbc:mysql://172.21.100.124:3306/mysql",
                 "debianmysql","debianmysqlpasswd");
