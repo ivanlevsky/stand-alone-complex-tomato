@@ -8,29 +8,7 @@ public class GlobalParams {
     private static String sectionMachineLearning = "machineLearning";
     private static String sectionAppium = "appium";
     private static String sectionSelenium = "selenium";
-
-//    public static String testImagePath;
-//    public static String testVideoPath;
-//    public static String testFilePath;
-//
-//    public static String systemFontPath;
-//    public static String tesseractPath;
-//    public static String imageInput;
-//    public static String imageOutput;
-//    public static String characterOutput;
-//    public static String sentenceOutput;
-//    public static String videoInput;
-//    public static String videoOutput;
-//    public static String faceDetectFaceXml;
-//    public static String faceDetectEyesXml;
-//
-//    public static String aaptPath = projectPath + ConfigUtils.readConfFile(confPath, sectionAppium, "aaptPath");
-//    public static String androidApklist;
-//    public static String appiumScreenshotPath;
-//    public static String appiumScreenrecordPath;
-//    public static String qrCodeImagePath;
-
-
+    private static String sectionDatabases = "databases";
 
     // testPath section
     public static String testImagePath = projectPath + ConfigUtils.readConfFile(confPath, sectionTestPath, "testImagePath");
@@ -62,5 +40,10 @@ public class GlobalParams {
     public static String edgeDriverPath = projectPath + ConfigUtils.readConfFile(confPath, sectionSelenium, "edgeDriverPath");
     public static String ieDriverPath =  projectPath + ConfigUtils.readConfFile(confPath, sectionSelenium, "ieDriverPath");
     public static String chromiumPath = "" + ConfigUtils.readConfFile(confPath, sectionSelenium, "chromiumPath");
+
+    //database section
+    public static String mariaDbJdbcUrl = projectPath + ConfigUtils.readConfFile(confPath, sectionDatabases, "mariaDbJdbcUrl");
+    public static String mariaDbJdbcUser = projectPath + ConfigUtils.readConfFile(confPath, sectionDatabases, "mariaDbJdbcUser");
+    public static String mariaDbJdbcPassword = projectPath + ConfigUtils.readConfFile(confPath, sectionDatabases, "mariaDbJdbcPassword");
 
 }
