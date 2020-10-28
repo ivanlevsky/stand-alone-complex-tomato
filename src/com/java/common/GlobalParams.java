@@ -45,5 +45,8 @@ public class GlobalParams {
     public static String mariaDbUrl = "" + ConfigUtils.readConfFile(confPath, sectionDatabases, "mariaDbUrl");
     public static String mariaDbUser = ""  + ConfigUtils.readConfFile(confPath, sectionDatabases, "mariaDbUser");
     public static String mariaDbPassword = ""  + ConfigUtils.readConfFile(confPath, sectionDatabases, "mariaDbPassword");
+    public static String pgsqlUrl = "" + ConfigUtils.readConfFile(confPath, sectionDatabases, "pgsqlUrl");
+    public static String pgsqlUser = ""  + ConfigUtils.readConfFile(confPath, sectionDatabases, "pgsqlUser");
+    public static String pgsqlPassword = ""  + ConfigUtils.readConfFile(confPath, sectionDatabases, "pgsqlPassword");
 
 }

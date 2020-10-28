@@ -4,12 +4,6 @@ import java.sql.*;
 import java.util.Properties;
 
 public class DatabaseUtils {
-    public static void main(String[] args) {
-        Connection con = connectToDatabases("jdbc:mysql://172.21.100.124:3306/mysql",
-                "debianmysql","debianmysqlpasswd");
-        StringBuilder result = executeQuery(con, "select * from user");
-        System.out.println(result.toString());
-    }
 
     public static StringBuilder executeQuery(Connection con, String sql){
         PreparedStatement pstmt;
@@ -32,7 +26,12 @@ public class DatabaseUtils {
             sqlResult.append(fields);
             while (rs.next()){
                 for (int i = 1; i <= rsNum ; i++) {
-                    sqlResult.append(rs.getObject(i).toString());
+                    if(rs.getObject(i) != null){
+                        sqlResult.append(rs.getObject(i).toString());
+                    }else {
+                        sqlResult.append("NULL_OBJECT");
+                    }
+
                     if(i < rsNum){
                         sqlResult.append(", ");
                     }
@@ -53,7 +52,7 @@ public class DatabaseUtils {
         Properties props = new Properties();
         props.setProperty("user", user);
         props.setProperty("password", password);
-//        props.setProperty("gssEncMode","disabled");
+//        props.setProperty("gssEncMode","disable");
         try {
             con = DriverManager.getConnection(url, props);
         } catch (SQLException e) {
