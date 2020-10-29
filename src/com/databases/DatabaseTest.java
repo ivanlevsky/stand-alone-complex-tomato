@@ -10,14 +10,13 @@ public class DatabaseTest {
         String sql = "select * from student";
         Connection con = DatabaseUtils.connectToDatabases(GlobalParams.mariaDbUrl,
                 GlobalParams.mariaDbUser,GlobalParams.mariaDbPassword);
-        StringBuilder result = DatabaseUtils.executeQuery(con, sql);
+        StringBuilder result = DatabaseUtils.executeSql(con, sql, true);
         System.out.println(result.toString());
 
         con = DatabaseUtils.connectToDatabases(GlobalParams.pgsqlUrl,
                 GlobalParams.pgsqlUser,GlobalParams.pgsqlPassword);
-        result = DatabaseUtils.executeQuery(con, sql);
+        result = DatabaseUtils.executeSql(con, sql,true);
         System.out.println(result.toString());
-
 
     }
 }

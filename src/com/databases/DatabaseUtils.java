@@ -5,38 +5,39 @@ import java.util.Properties;
 
 public class DatabaseUtils {
 
-    public static StringBuilder executeQuery(Connection con, String sql){
+    public static StringBuilder executeSql(Connection con, String sql, boolean getResult){
         PreparedStatement pstmt;
         ResultSet rs;
         StringBuilder sqlResult = new StringBuilder();
         try {
-//            con.setAutoCommit(false);
             pstmt = con.prepareStatement(sql);
 //            pstmt.setFetchSize(8000);
             rs = pstmt.executeQuery();
-            int rsNum = rs.getMetaData().getColumnCount();
-            StringBuilder fields = new StringBuilder();
-            for (int l = 1; l <= rsNum ; l++) {
-                fields.append(rs.getMetaData().getColumnName(l));
-                if(l < rsNum){
-                    fields.append(", ");
-                }
-            }
-            fields.append(System.lineSeparator());
-            sqlResult.append(fields);
-            while (rs.next()){
-                for (int i = 1; i <= rsNum ; i++) {
-                    if(rs.getObject(i) != null){
-                        sqlResult.append(rs.getObject(i).toString());
-                    }else {
-                        sqlResult.append("NULL_OBJECT");
+            if(getResult) {
+                int rsNum = rs.getMetaData().getColumnCount();
+                StringBuilder fields = new StringBuilder();
+                for (int l = 1; l <= rsNum; l++) {
+                    fields.append(rs.getMetaData().getColumnName(l));
+                    if (l < rsNum) {
+                        fields.append(", ");
                     }
+                }
+                fields.append(System.lineSeparator());
+                sqlResult.append(fields);
+                while (rs.next()) {
+                    for (int i = 1; i <= rsNum; i++) {
+                        if (rs.getObject(i) != null) {
+                            sqlResult.append(rs.getObject(i).toString());
+                        } else {
+                            sqlResult.append("NULL_OBJECT");
+                        }
 
-                    if(i < rsNum){
-                        sqlResult.append(", ");
+                        if (i < rsNum) {
+                            sqlResult.append(", ");
+                        }
                     }
+                    sqlResult.append(System.lineSeparator());
                 }
-                sqlResult.append(System.lineSeparator());
             }
             rs.close();
             pstmt.close();
@@ -55,9 +56,11 @@ public class DatabaseUtils {
 //        props.setProperty("gssEncMode","disable");
         try {
             con = DriverManager.getConnection(url, props);
+            con.setAutoCommit(false);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return con;
     }
 
