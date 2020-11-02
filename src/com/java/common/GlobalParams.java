@@ -49,4 +49,7 @@ public class GlobalParams {
     public static String pgsqlUser = ""  + ConfigUtils.readConfFile(confPath, sectionDatabases, "pgsqlUser");
     public static String pgsqlPassword = ""  + ConfigUtils.readConfFile(confPath, sectionDatabases, "pgsqlPassword");
 
+    public static String excelDatasets = projectPath + ConfigUtils.readConfFile(confPath, sectionDatabases, "excelDatasets");
+    public static String csvDatasets = projectPath + ConfigUtils.readConfFile(confPath, sectionDatabases, "csvDatasets");
+
 }
