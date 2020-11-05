@@ -7,11 +7,12 @@ import java.util.Properties;
 
 public class DatabaseUtils {
 
-    public static StringBuilder executeSql(Connection con, String sql, boolean getResult, ArrayList<String>... data){
+    public static String executeSql(Connection con, String sql, boolean getResult, ArrayList<String>... data){
         PreparedStatement pstmt;
         ResultSet rs;
         StringBuilder sqlResult = new StringBuilder();
         HashMap<Integer,String> tableColumnType = new HashMap<>();
+        String splitText = "S_P_L_I_T";
         try {
 
             if(data.length > 0){
@@ -25,7 +26,7 @@ public class DatabaseUtils {
                 }
                 pstmt = con.prepareStatement(sql);
                 for (String s : data[0]) {
-                    String[] splitData = s.split("S_P_L_I_T");
+                    String[] splitData = s.split(splitText);
                     for (int i = 1; i <= splitData.length; i++) {
                         //mysql:INTEGER, pgsql:int4
                         //mysql:VARCHAR, pgsql:varchar
@@ -51,7 +52,7 @@ public class DatabaseUtils {
                 for (int l = 1; l <= rsNum; l++) {
                     fields.append(rs.getMetaData().getColumnName(l));
                     if (l < rsNum) {
-                        fields.append(", ");
+                        fields.append(splitText);
                     }
                 }
                 fields.append(System.lineSeparator());
@@ -60,12 +61,10 @@ public class DatabaseUtils {
                     for (int i = 1; i <= rsNum; i++) {
                         if (rs.getObject(i) != null) {
                             sqlResult.append(rs.getObject(i).toString());
-                        } else {
-                            sqlResult.append("NULL_OBJECT");
                         }
 
                         if (i < rsNum) {
-                            sqlResult.append(", ");
+                            sqlResult.append(splitText);
                         }
                     }
                     sqlResult.append(System.lineSeparator());
@@ -78,7 +77,7 @@ public class DatabaseUtils {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return sqlResult;
+        return sqlResult.toString();
     }
 
     public static Connection connectToDatabases(String url, String user, String password){
