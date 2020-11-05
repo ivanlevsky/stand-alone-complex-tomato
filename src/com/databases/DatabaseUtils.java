@@ -1,18 +1,50 @@
 package com.databases;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 
 public class DatabaseUtils {
 
-    public static StringBuilder executeSql(Connection con, String sql, boolean getResult){
+    public static StringBuilder executeSql(Connection con, String sql, boolean getResult, ArrayList<String>... data){
         PreparedStatement pstmt;
         ResultSet rs;
         StringBuilder sqlResult = new StringBuilder();
+        HashMap<Integer,String> tableColumnType = new HashMap<>();
         try {
-            pstmt = con.prepareStatement(sql);
-//            pstmt.setFetchSize(8000);
-            rs = pstmt.executeQuery();
+
+            if(data.length > 0){
+                String tableName = sql.toLowerCase();
+                tableName = tableName.substring(tableName.indexOf("into")+4,tableName.indexOf("(")).trim();
+                pstmt = con.prepareStatement("select * from "+ tableName +" limit 1");
+                pstmt.executeQuery();
+                int rsNum = pstmt.getMetaData().getColumnCount();
+                for (int i = 1; i <= rsNum; i++) {
+                    tableColumnType.put(i,pstmt.getMetaData().getColumnTypeName(i));
+                }
+                pstmt = con.prepareStatement(sql);
+                for (String s : data[0]) {
+                    String[] splitData = s.split("S_P_L_I_T");
+                    for (int i = 1; i <= splitData.length; i++) {
+                        //mysql:INTEGER, pgsql:int4
+                        //mysql:VARCHAR, pgsql:varchar
+                        if(tableColumnType.get(i).toLowerCase().startsWith("int")){
+                            pstmt.setInt(i, Integer.parseInt(splitData[i-1]));
+                        }else if(tableColumnType.get(i).equalsIgnoreCase("varchar")){
+                            pstmt.setString(i, splitData[i-1]);
+                        }
+                    }
+                    pstmt.addBatch();
+                }
+                pstmt.executeBatch();
+            }else {
+                pstmt = con.prepareStatement(sql);
+                pstmt.execute();
+            }
+
+            rs = pstmt.getResultSet();
+            con.commit();
             if(getResult) {
                 int rsNum = rs.getMetaData().getColumnCount();
                 StringBuilder fields = new StringBuilder();
@@ -39,9 +71,10 @@ public class DatabaseUtils {
                     sqlResult.append(System.lineSeparator());
                 }
             }
-            rs.close();
+            if (rs != null) {
+                rs.close();
+            }
             pstmt.close();
-            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -49,19 +82,18 @@ public class DatabaseUtils {
     }
 
     public static Connection connectToDatabases(String url, String user, String password){
-        Connection con = null;
+        Connection connection = null;
         Properties props = new Properties();
         props.setProperty("user", user);
         props.setProperty("password", password);
 //        props.setProperty("gssEncMode","disable");
         try {
-            con = DriverManager.getConnection(url, props);
-            con.setAutoCommit(false);
+            connection = DriverManager.getConnection(url, props);
+            connection.setAutoCommit(false);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return con;
+        return connection;
     }
 
 }
