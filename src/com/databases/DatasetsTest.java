@@ -6,6 +6,9 @@ import java.util.HashMap;
 
 public class DatasetsTest {
     public static void main(String[] args) {
+        readExcelWithConverter();
+    }
+    private static void readExcelWithConverter(){
         HashMap<String, String> ec = new HashMap<>();
         ec.put("id","int");
         ec.put("name", "str");

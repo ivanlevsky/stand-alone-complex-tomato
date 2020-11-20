@@ -1,5 +1,6 @@
 package com.databases;
 
+import com.google.common.io.Files;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -10,6 +11,22 @@ import java.util.HashMap;
 
 public class DatasetsUtils {
     private final static String splitText = "S_P_L_I_T";
+
+    public static void writeCSV(String csvFilePath, String data, boolean appendWrite){
+        File csvFile = new File(csvFilePath);
+        try {
+            if(!csvFile.exists()){
+                csvFile.createNewFile();
+            }
+
+            Files.write(data.replace(splitText,", ").getBytes("GBK"), csvFile);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public static void writeExcel(String excelFile, String sheetName, String data, boolean appendWrite){
         try {
             SXSSFWorkbook wb;
@@ -75,6 +92,8 @@ public class DatasetsUtils {
                 }
                 result.add(temp.toString());
             }
+            inp.close();
+            wb.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

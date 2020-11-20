@@ -20,6 +20,7 @@ public class DatabaseTest {
                 GlobalParams.mariaDbUser,GlobalParams.mariaDbPassword);
         String mariaDBRowValues = DatabaseUtils.executeSql(con, querySql, true);
         DatasetsUtils.writeExcel(GlobalParams.excelDatasets, "movieMaria", mariaDBRowValues, false);
+        DatasetsUtils.writeCSV(GlobalParams.csvDatasets,mariaDBRowValues,true);
 
         con = DatabaseUtils.connectToDatabases(GlobalParams.pgsqlUrl,
                 GlobalParams.pgsqlUser,GlobalParams.pgsqlPassword);
