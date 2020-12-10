@@ -8,13 +8,13 @@ import java.util.ArrayList;
 
 public class DatalineCompare {
     public static void main(String[] args) throws IOException {
-        File tf1 = new File("C:\\Users\\ivanovsky\\Desktop\\nds1.txt");
-        File tf2 = new File("C:\\Users\\ivanovsky\\Desktop\\nds2.txt");
+        File tf1 = new File("C:\\Users\\ivanovsky\\Desktop\\nds list1.txt");
+        File tf2 = new File("C:\\Users\\ivanovsky\\Desktop\\nds list2.txt");
         ArrayList<String> text1 = (ArrayList<String>) Files.readLines(tf1, Charset.forName("GBK"));
         ArrayList<String> text2 = (ArrayList<String>) Files.readLines(tf2, Charset.forName("GBK"));
 
-        diffFunc2(text1, text2);
-        diffFunc1(text1, text2);
+        diffFunc1((ArrayList<String>) text1.clone(), (ArrayList<String>) text2.clone());
+        diffFunc2((ArrayList<String>) text1.clone(), (ArrayList<String>) text2.clone());
     }
     private static void diffFunc2(ArrayList<String> list1, ArrayList<String> list2){
         Long startTime = System.currentTimeMillis();
