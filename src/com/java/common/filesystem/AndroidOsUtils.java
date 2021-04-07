@@ -138,4 +138,15 @@ public class AndroidOsUtils {
         return msg.contains("mDreamingLockscreen=true");
     }
 
+    public static String androidFindAppUserId(String appPackage){
+        String cmd = "dumpsys package " + appPackage + " | grep userId";
+        return WindowsOsUtils.getShellOutput("adb shell", cmd);
+    }
+
+    public static void androidBackupAppApk(String appPackage, String backupPath){
+        String cmd = "pm path "+ appPackage;
+        String msg = WindowsOsUtils.getShellOutput("adb shell", cmd);
+        cmd = "adb pull " + msg.replace("package:" , "").trim() + " "+backupPath;
+        WindowsOsUtils.getCommandOutput(cmd);
+    }
 }
