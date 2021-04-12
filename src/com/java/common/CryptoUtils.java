@@ -8,19 +8,16 @@ import java.io.IOException;
 
 public class CryptoUtils {
     public static void main(String[] args) {
-        String pathname = "";
-//		System.out.println(fileCheckSum(pathname,"crc32"));
 		encode("胜多负少");
-
     }
 
-	private static void encode(String string) {
+	public static void encode(String string) {
 //		System.out.println(Byte.string.getBytes());
 	}
 
 	@Deprecated // md5(), sha1() deprecate
 	@SuppressWarnings("UnstableApiUsage") //remove this annotation in guava future update
-    private static String fileCheckSum(String fileName, String checksumType)  {
+    public static String fileCheckSum(String fileName, String checksumType)  {
 		try {
 			String hashCode;
 			File file = new File(fileName);
