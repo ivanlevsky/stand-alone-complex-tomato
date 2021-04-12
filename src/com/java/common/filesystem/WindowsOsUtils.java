@@ -10,12 +10,20 @@ public class WindowsOsUtils {
     public static void main(String[] args) {
 //        System.out.println(getShellOutput("adb shell", "dumpsys window | grep mDreamingLockscreen"));
 //        System.out.println(getCommandOutput("dir"));
-        System.out.println(checkProcessRunning("chrome.exe"));
+//        System.out.println(checkProcessRunning("chrome.exe"));
     }
 
     public static void killProcessByName(String processName){
         try {
             Runtime.getRuntime().exec("taskkill /f /im  "+processName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void runProcessByName(String processName){
+        try {
+            Runtime.getRuntime().exec(processName);
         } catch (IOException e) {
             e.printStackTrace();
         }
