@@ -8,8 +8,9 @@ import java.util.Locale;
 
 public class WindowsOsUtils {
     public static void main(String[] args) {
-        System.out.println(getShellOutput("adb shell", "dumpsys window | grep mDreamingLockscreen"));
+//        System.out.println(getShellOutput("adb shell", "dumpsys window | grep mDreamingLockscreen"));
 //        System.out.println(getCommandOutput("dir"));
+        System.out.println(checkProcessRunning("chrome.exe"));
     }
 
     public static void killProcessByName(String processName){
@@ -18,6 +19,26 @@ public class WindowsOsUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static boolean checkProcessRunning(String processName){
+        boolean processAlive = false;
+        try {
+            Process rt = Runtime.getRuntime().exec("tasklist /nh /fi  \"Imagename eq "+processName  + "\"");
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(rt.getInputStream()) );
+            String line;
+            while ((line = in.readLine()) != null) {
+                if(line.startsWith(processName)) {
+                    processAlive = true;
+                }
+            }
+            in.close();
+            rt.destroy();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return processAlive;
     }
 
     public static String getCommandOutput(String... cmd){
