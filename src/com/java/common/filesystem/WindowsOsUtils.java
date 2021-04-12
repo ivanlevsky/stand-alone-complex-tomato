@@ -16,7 +16,8 @@ public class WindowsOsUtils {
     public static void killProcessByName(String processName){
         try {
             Runtime.getRuntime().exec("taskkill /f /im  "+processName);
-        } catch (IOException e) {
+            Thread.sleep(70L);
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
     }
