@@ -81,7 +81,11 @@ public class WindowsOsUtils {
 
     public static String getShellOutput(String shellCmd, String executeCmd){
         StringBuilder output = new StringBuilder();
+        String outputText = "";
         ProcessBuilder processBuilder = new ProcessBuilder();
+        if(shellCmd.contains("powershell")){
+            executeCmd = executeCmd + "\r\n";
+        }
         processBuilder.command("cmd","/c", shellCmd);
 
         try {
@@ -101,6 +105,11 @@ public class WindowsOsUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return output.toString();
+        outputText = output.toString();
+        if(shellCmd.contains("powershell")){
+            outputText = outputText.substring(outputText.indexOf(executeCmd) + executeCmd.length());
+            outputText = outputText.substring(0, outputText.indexOf("\r\nPS"));
+        }
+        return outputText;
     }
 }
