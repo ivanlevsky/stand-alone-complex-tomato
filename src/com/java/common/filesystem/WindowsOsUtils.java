@@ -10,7 +10,7 @@ public class WindowsOsUtils {
     public static void main(String[] args) {
 //        System.out.println(getShellOutput("adb shell", "dumpsys window | grep mDreamingLockscreen"));
 //        System.out.println(getCommandOutput("dir"));
-//        System.out.println(checkProcessRunning("chrome.exe"));
+        System.out.println(checkProcessRunning("notepad.exe"));
     }
 
     public static void killProcessByName(String processName){
@@ -32,6 +32,14 @@ public class WindowsOsUtils {
 
     public static boolean checkProcessRunning(String processName){
         boolean processAlive = false;
+        if(processName.contains("\\")){
+            processName = processName.substring(processName.lastIndexOf("\\")).replace("\\", "");
+        }else if(processName.contains("/")){
+            processName = processName.substring(processName.lastIndexOf("/")).replace("/", "");
+        }else if(processName.contains("//")){
+            processName = processName.substring(processName.lastIndexOf("//")).replace("//", "");
+        }
+
         try {
             Process rt = Runtime.getRuntime().exec("tasklist /nh /fi  \"Imagename eq "+processName  + "\"");
             BufferedReader in = new BufferedReader(
