@@ -33,7 +33,8 @@ public class AppiumUtils {
                 }
                 caps.setCapability("platformVersion", AndroidOsUtils.androidVersion());
                 caps.setCapability("platformName", "Android");
-                caps.setCapability("uuid", AndroidOsUtils.androidDeviceList());
+//                caps.setCapability("uuid", AndroidOsUtils.androidDeviceList()); udid not working one realme q2
+                caps.setCapability("deviceName", AndroidOsUtils.androidDeviceList());
                 if (!initAppName.equals("")) {
                     String result = checkAppStatus(initAppName);
                     if (result.startsWith("true")) {
