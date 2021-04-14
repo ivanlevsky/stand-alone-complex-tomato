@@ -30,7 +30,7 @@ public class CryptoUtils {
 				case "md5": hashCode = byteSource.hash(Hashing.md5()).toString().toUpperCase();break;
 				case "sha1": hashCode = byteSource.hash(Hashing.sha1()).toString().toUpperCase();break;
 				case "sha256": hashCode = byteSource.hash(Hashing.sha256()).toString().toUpperCase();break;
-				case "crc32": hashCode = Long.toHexString(byteSource.hash(Hashing.crc32()).padToLong());break;
+				case "crc32": hashCode = Long.toHexString(byteSource.hash(Hashing.crc32()).padToLong()).toUpperCase();break;
 				default :hashCode = "wrong checksum type!!";break;
 			}
 			return hashCode;

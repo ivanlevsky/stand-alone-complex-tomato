@@ -34,7 +34,7 @@ class CryptoUtilsTest extends CryptoUtils {
                          fileCheckSum(filePath,"sha1")),
                  () -> assertEquals("9F2C16E91B305CC547E159DEDC4E34BDE312B120CB2749E418739C01774156FE",
                          fileCheckSum(filePath,"sha256")),
-                 () -> assertEquals("7a450b78",
+                 () -> assertEquals("7A450B78",
                          fileCheckSum(filePath,"crc32"))
 
          );
