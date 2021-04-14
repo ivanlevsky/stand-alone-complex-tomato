@@ -9,10 +9,13 @@ import com.java.common.StringUtils;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AndroidOsUtils {
     public static void main(String[] args) {
 //        androidAaptGetAppInfo("/data/app/MiuiScreenRecorder/MiuiScreenRecorder.apk");
+        androidCurrentOpenedAppInfo();
     }
 
     public static String androidDeviceList(){
@@ -28,10 +31,31 @@ public class AndroidOsUtils {
     }
 
     public static String[] androidCurrentOpenedAppInfo() {
-        String msg = WindowsOsUtils.getShellOutput("adb shell",
+        String adbDumpsysWindowMsg = WindowsOsUtils.getShellOutput("adb shell",
+                "dumpsys window windows");
+        String msg_split_one = "";
+        String msg_split_two = "";
+        String msg = "";
+        if(adbDumpsysWindowMsg.contains("mCurrentFocus")){
+            msg = WindowsOsUtils.getShellOutput("adb shell",
                 "dumpsys window windows | grep -E \'mCurrentFocus|mFocusedApp\'");
-        msg = StringUtils.splitStringByRegex("\\{|\\}",msg)[1].split(" ")[2];
-        return new String[]{msg.split("/")[0], msg.split("/")[1]};
+            msg = StringUtils.splitStringByRegex("\\{|\\}",msg)[1].split(" ")[2];
+        }else if(adbDumpsysWindowMsg.contains("mSurface")){
+            msg = WindowsOsUtils.getShellOutput("adb shell",
+                    "dumpsys window windows | grep -E \'mSurface=Surface\'");
+            Matcher m = Pattern.compile("mSurface=Surface\\(name=(.+?)/(.+?)\\)/@").matcher(msg);
+            if(m.find()){
+                for (int i = 0; i < m.groupCount(); i++) {
+                    if(m.group(i).contains("mSurface")){
+                        msg = m.group(i);
+                    }
+                }
+            }
+            msg = msg.replace("mSurface=Surface(name=","").replace(")/@","");
+        }
+        msg_split_one = msg.split("/")[0];
+        msg_split_two = msg.split("/")[1];
+        return new String[]{msg_split_one, msg_split_two};
     }
 
     public static String[] androidCheckAppActive(String appPackage) {
