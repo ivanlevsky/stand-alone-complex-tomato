@@ -9,6 +9,7 @@ public class GlobalParams {
     private static String sectionAppium = "appium";
     private static String sectionSelenium = "selenium";
     private static String sectionDatabases = "databases";
+    private static String sectionTestsReports = "testReports";
 
     // testPath section
     public static String testImagePath = projectPath + ConfigUtils.readConfFile(confPath, sectionTestPath, "testImagePath");
@@ -51,5 +52,8 @@ public class GlobalParams {
 
     public static String excelDatasets = projectPath + ConfigUtils.readConfFile(confPath, sectionDatabases, "excelDatasets");
     public static String csvDatasets = projectPath + ConfigUtils.readConfFile(confPath, sectionDatabases, "csvDatasets");
+
+    //testReports section
+    public static String testNGReports = projectPath + ConfigUtils.readConfFile(confPath, sectionTestsReports, "testNGReports");
 
 }
