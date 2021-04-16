@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import static org.testng.Assert.*;
-
+@Test(groups = {"not run group test"})
 public class WindowsOsUtilsTest extends WindowsOsUtils {
     private String processIsRunning;
     private String processNotRunning;
