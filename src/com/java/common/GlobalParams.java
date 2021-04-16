@@ -55,5 +55,6 @@ public class GlobalParams {
 
     //testReports section
     public static String testNGReports = projectPath + ConfigUtils.readConfFile(confPath, sectionTestsReports, "testNGReports");
+    public static String junitReports = projectPath + ConfigUtils.readConfFile(confPath, sectionTestsReports, "junitReports");
 
 }
