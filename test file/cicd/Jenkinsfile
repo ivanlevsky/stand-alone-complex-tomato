@@ -8,14 +8,15 @@ pipeline {
 					$class: 'GitSCM',
 					branches: [[name: '*/master']],
 					extensions: [
-					    //relativeTargetDir will cause permission error, due to jenkins create a user in linux called 'jenkins'
-					    //this user don't have permissions in folder gitproject, gitproject's user is zelda
-						//[$class: 'RelativeTargetDirectory', relativeTargetDir: '/home/zelda/Downloads/jenkins/gitproject/']
 					],
 					userRemoteConfigs: [
 						[
-						    //credentialsId: '2b443b6c-ddd2-4448-b3db-96ba820dd1c9',
-						    url: 'https://github.com/ivanlevsky/stand-alone-complex-tomato.git'
+						    //https git clone
+                            //url: 'https://github.com/ivanlevsky/stand-alone-complex-tomato.git'
+
+                            //ssh git clone
+                            credentialsId: 'jenkins-ssh-key',
+                            url: 'git@github.com:ivanlevsky/stand-alone-complex-tomato.git'
 						]
 					]
 				])
