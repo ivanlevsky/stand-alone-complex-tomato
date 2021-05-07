@@ -13,6 +13,10 @@ public class WindowsOsUtils {
         System.out.println(checkProcessRunning("notepad.exe"));
     }
 
+    public static Boolean isWindowsOS(){
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
+
     public static void killProcessByName(String processName){
         try {
             Runtime.getRuntime().exec("taskkill /f /im  "+processName);

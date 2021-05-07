@@ -23,34 +23,44 @@ class WindowsOsUtilsTest extends WindowsOsUtils {
 
     @AfterEach
     void tearDown() {
-        killProcessByName(processToTestRunAndKill);
+        if(WindowsOsUtils.isWindowsOS()) {
+            killProcessByName(processToTestRunAndKill);
+        }
     }
 
     @Test
     void testKillAndRunProcessByName() {
-        runProcessByName(processToTestRunAndKill);
-        assertTrue(checkProcessRunning(processToTestRunAndKill));
-        killProcessByName(processToTestRunAndKill);
-        assertFalse(checkProcessRunning(processToTestRunAndKill));
+        if(WindowsOsUtils.isWindowsOS()) {
+            runProcessByName(processToTestRunAndKill);
+            assertTrue(checkProcessRunning(processToTestRunAndKill));
+            killProcessByName(processToTestRunAndKill);
+            assertFalse(checkProcessRunning(processToTestRunAndKill));
+        }
     }
 
 
 
     @Test
     void testCheckProcessRunning() {
-        assertAll("check process running",
-                () -> assertTrue(checkProcessRunning(processIsRunning)),
-                () -> assertFalse(checkProcessRunning(processNotRunning))
-                );
+        if(WindowsOsUtils.isWindowsOS()) {
+            assertAll("check process running",
+                    () -> assertTrue(checkProcessRunning(processIsRunning)),
+                    () -> assertFalse(checkProcessRunning(processNotRunning))
+            );
+        }
     }
 
     @Test
     void testGetCommandOutput() {
-        assertEquals("123",getCommandOutput(command).trim());
+        if(WindowsOsUtils.isWindowsOS()) {
+            assertEquals("123", getCommandOutput(command).trim());
+        }
     }
 
     @Test
     void testGetShellOutput() {
-        assertEquals("123", getShellOutput("powershell",command).trim());
+        if(WindowsOsUtils.isWindowsOS()) {
+            assertEquals("123", getShellOutput("powershell", command).trim());
+        }
     }
 }
