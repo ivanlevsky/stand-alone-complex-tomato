@@ -27,6 +27,7 @@ class CryptoUtilsTest extends CryptoUtils {
     @Deprecated // md5(), sha1() deprecate
     void testFileCheckSum() {
          System.out.println("test md5, sha1, sha256, crc32 checksum");
+         System.out.println("filePath : "+filePath);
          assertAll("checkSum",
                  () -> assertEquals("B42A17A0F83B737FAF403CAA6B2641AF",
                          fileCheckSum(filePath,"md5")),
