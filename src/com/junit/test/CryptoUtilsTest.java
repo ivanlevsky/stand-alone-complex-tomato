@@ -11,7 +11,7 @@ class CryptoUtilsTest extends CryptoUtils {
 
     @BeforeEach
     void setUp() {
-         filePath = System.getProperty("user.dir") + "/LICENSE";
+         filePath = System.getProperty("user.dir") + "/README.MD";
     }
 
     @AfterEach
@@ -31,13 +31,13 @@ class CryptoUtilsTest extends CryptoUtils {
          System.out.println("filePath : "+ filePath);
          System.out.println(WindowsOsUtils.isWindowsOS());
          assertAll("checkSum",
-                 () -> assertEquals("B42A17A0F83B737FAF403CAA6B2641AF",
+                 () -> assertEquals("84DC54C99868F8BC46F737107A3CCD6D",
                          fileCheckSum(filePath,"md5")),
-                 () -> assertEquals("29D1871D6CD6CBDA3D35AB3A1448E58822FA1D55",
+                 () -> assertEquals("7C37D85DE66F4C83B8E22A5D78583D0DD472F0B7",
                          fileCheckSum(filePath,"sha1")),
-                 () -> assertEquals("9F2C16E91B305CC547E159DEDC4E34BDE312B120CB2749E418739C01774156FE",
+                 () -> assertEquals("43CFDEE0E1C3F558A6482C567FB5135788D31BBBF9D28894F0B546512559A86A",
                          fileCheckSum(filePath,"sha256")),
-                 () -> assertEquals("7A450B78",
+                 () -> assertEquals("F407870F",
                          fileCheckSum(filePath,"crc32"))
 
          );
