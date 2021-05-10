@@ -28,8 +28,20 @@ pipeline {
 
         stage('build project') {
             steps {
+                sh 'cp ./test\\ file/cicd/pom.xml  ./'
 				sh 'mvn -B -DskipTests clean package'
             }
         }
+
+		stage('Test') {
+			steps {
+				sh 'mvn test'
+			}
+			// post {
+			//     always {
+			//         junit 'target/surefire-reports/*.xml'
+			//     }
+			// }
+		}
     }
 }
