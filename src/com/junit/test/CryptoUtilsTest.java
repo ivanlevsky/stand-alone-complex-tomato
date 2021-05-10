@@ -11,7 +11,7 @@ class CryptoUtilsTest extends CryptoUtils {
 
     @BeforeEach
     void setUp() {
-         filePath = System.getProperty("user.dir") + "/README.MD";
+         filePath = System.getProperty("user.dir") + "/README.md";
     }
 
     @AfterEach
@@ -29,7 +29,6 @@ class CryptoUtilsTest extends CryptoUtils {
     void testFileCheckSum() {
          System.out.println("test md5, sha1, sha256, crc32 checksum");
          System.out.println("filePath : "+ filePath);
-         System.out.println(WindowsOsUtils.isWindowsOS());
          assertAll("checkSum",
                  () -> assertEquals("84DC54C99868F8BC46F737107A3CCD6D",
                          fileCheckSum(filePath,"md5")),
