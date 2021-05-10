@@ -14,7 +14,9 @@ public class WindowsOsUtils {
     }
 
     public static Boolean isWindowsOS(){
-        return System.getProperty("os.name").toLowerCase().contains("windows");
+        String systemInfo = System.getProperty("os.name");
+        System.out.println("This system is :" + systemInfo);
+        return systemInfo.toLowerCase().contains("windows");
     }
 
     public static void killProcessByName(String processName){
