@@ -1,11 +1,15 @@
 pipeline {
     agent any
+	options {
+		// Keep the 10 most recent builds
+		buildDiscarder(logRotator(numToKeepStr:'10'))
+	}
 	tools {
 		// Install the Maven version configured as "M3" and add it to the path.
 		maven "M3"
 	}
     stages {
-		stage('git checkout') {
+		stage('Git Checkout') {
 			steps {
 				checkout([
 					$class: 'GitSCM',
@@ -26,7 +30,7 @@ pipeline {
 			}
 		}
 
-        stage('build project') {
+        stage('Build Project') {
             steps {
                 sh 'cp ./test\\ file/cicd/pom.xml  ./'
 				sh 'mvn -B -DskipTests clean package'
@@ -37,11 +41,30 @@ pipeline {
 			steps {
 				sh 'mvn test'
 			}
-			// post {
-			//     always {
-			//         junit 'target/surefire-reports/*.xml'
-			//     }
-			// }
+			post {
+				always {
+					junit 'target/surefire-reports/*.xml'
+				}
+				success {
+					echo 'I succeeded!'
+					mail to: 'zhou_zhiqi@hoperun.com',
+							subject: "Success Pipeline: ${currentBuild.fullDisplayName}",
+							body: "Something is wrong with ${env.BUILD_URL}"
+				}
+				unstable {
+					echo 'I am unstable :/'
+				}
+
+				failure {
+					echo 'I failed :('
+				}
+
+				changed {
+					echo 'Things were different before...'
+				}
+			}
+
 		}
+
     }
 }
