@@ -22,6 +22,10 @@ public class AndroidOsUtils {
         return WindowsOsUtils.getCommandOutput("adb devices").split("\n")[1].replace("device", "").trim();
     }
 
+    public static String androidProductInfo(){
+        return WindowsOsUtils.getCommandOutput("adb shell getprop ro.product.model");
+    }
+
     public static String androidVersion(){
         return WindowsOsUtils.getCommandOutput("adb shell getprop ro.build.version.release");
     }
@@ -121,6 +125,8 @@ public class AndroidOsUtils {
 
         System.out.println("["+packageList+"]");
 //       write_string_to_file(android_apk_list, package_list, 'utf8')
+        //GlobalParams.androidApklist.replace("android_apk_list",
+        //                    androidProductInfo() + "_android_apk_list")
         return packageList.toString();
     }
 
@@ -143,7 +149,8 @@ public class AndroidOsUtils {
 
     public static String[] androidSearchPackageByName(String appName){
         try {
-            String[] readList = Files.asCharSource(new File(GlobalParams.androidApklist),Charsets.UTF_8).read()
+            String[] readList = Files.asCharSource(new File(GlobalParams.androidApklist.replace("android_apk_list",
+                    androidProductInfo() + "_android_apk_list")),Charsets.UTF_8).read()
                     .replace("[","").replace("]","").replace("'","").split(",");
             for (int i = 0; i < readList.length; i++) {
                 if(readList[i].equals(appName)) {
