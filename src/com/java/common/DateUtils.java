@@ -9,18 +9,37 @@ public class DateUtils {
 		int calcDate = -10;
         System.out.println(CalculateDate(oldDate, calcDate, false));
         System.out.println(CalculateDate(oldDate, calcDate, true));
+		int calcDate2 = 10;
+        System.out.println(CalculateDate(oldDate, calcDate2, false));
+        System.out.println(CalculateDate(oldDate, calcDate2, true));
+		
     }
 
     public static String CalculateDate(String date, int calcDate, boolean skipWeekends){
+		int passDays = 0;
 		if(skipWeekends){
 			int weekEndsCount = 0;
+			int workDaysCount = 0;
 			if(calcDate < 0) {
-				for (int i = 0; i < 10; i++){
-					if(isDayWeekends(LocalDate.parse(date).minusDays(i).toString())) {
+				while (workDaysCount > calcDate) {
+					if	(!isDayWeekends(LocalDate.parse(date).plusDays(passDays).toString())) {
+						workDaysCount -= 1;
+					}else {
 						weekEndsCount -= 1;
 					}
+					passDays += 1;
+				}
+			} else if(calcDate > 0){
+				while (workDaysCount < calcDate) {
+					if	(!isDayWeekends(LocalDate.parse(date).plusDays(passDays).toString())) {
+						workDaysCount += 1;
+					}else {
+						weekEndsCount += 1;
+					}
+					passDays += 1;
 				}
 			}
+			
 			calcDate += weekEndsCount;
 		}
         return LocalDate.parse(date).plusDays(calcDate).toString();
