@@ -11,6 +11,8 @@ import java.util.HashMap;
 
 public class DatasetsUtils {
     private final static String splitText = "S_P_L_I_T";
+	private final static String sheetRowSplit = "R_S_P_L_I_T";
+	private final static String sheetColumnSplit = "C_S_P_L_I_T";
 
     public static void writeCSV(String csvFilePath, String data, boolean appendWrite){
         File csvFile = new File(csvFilePath);
@@ -100,4 +102,46 @@ public class DatasetsUtils {
 
         return result;
     }
+	
+	public static void mergeMultiSheetsToOne(String oriExcelFile, String newExcelFile){
+		try {
+			InputStream inp = new FileInputStream(oriExcelFile);
+			Workbook wb = WorkbookFactory.create(inp);
+			Sheet tempSheet;
+			StringBuilder allSheetString = new StringBuilder();
+			for (int i = 0; i < wb.getNumberOfSheets(); i++) {
+				tempSheet = wb.getSheetAt(i);
+				for (int j = 0; j < tempSheet.getLastRowNum(); j++) {
+					allSheetString.append(tempSheet.getRow(j).getCell(0) + sheetRowSplit);
+				}
+				allSheetString.append(sheetColumnSplit);
+			}
+			inp.close();
+			wb.close();
+			
+			SXSSFWorkbook swb = new SXSSFWorkbook(100);
+			Sheet sh = swb.createSheet("Sheet1");
+			String[] columnSheetStrings = allSheetString.toString().split(sheetColumnSplit);
+			int tempRowNum = 0;
+			Row tempRow;
+			for (int i = 0; i < columnSheetStrings.length; i++) {
+				tempRowNum = columnSheetStrings[i].split(sheetRowSplit).length;
+				for (int j = 0; j < tempRowNum; j++) {
+					if(sh.getRow(j) == null) {
+						sh.createRow(j).createCell(i).setCellValue(columnSheetStrings[i].split(sheetRowSplit)[j]);
+					}else {
+						sh.getRow(j).createCell(i).setCellValue(columnSheetStrings[i].split(sheetRowSplit)[j]);
+					}
+				}
+			}
+			
+			FileOutputStream out = new FileOutputStream(newExcelFile);
+			swb.write(out);
+			out.close();
+			swb.dispose();
+			swb.close();
+		} catch (IOException e) {
+			e.printStackTrace(e);
+		}
+	}
 }
