@@ -37,6 +37,20 @@ public class WindowsOsUtils {
             e.printStackTrace();
         }
     }
+    
+    public static void runVBScript(String vbsFile) {
+    	int returnValue = -1;
+    	Process process = null;
+    	try {
+			process = Runtime.getRuntime().exec("wscript "+vbsFile);
+			process.waitFor();
+			returnValue = process.exitValue();
+			System.out.println("return:"+returnValue);
+		} catch (InterruptedException | IOException e) {
+			process.destroy();
+			e.printStackTrace();
+		}
+    }
 
     public static boolean checkProcessRunning(String processName){
         boolean processAlive = false;
