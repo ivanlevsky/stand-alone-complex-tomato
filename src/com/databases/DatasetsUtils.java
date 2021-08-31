@@ -102,7 +102,7 @@ public class DatasetsUtils {
 
         return result;
     }
-	
+
 	public static void mergeMultiSheetsToOne(String oriExcelFile, String newExcelFile){
 		try {
 			InputStream inp = new FileInputStream(oriExcelFile);
@@ -118,7 +118,7 @@ public class DatasetsUtils {
 			}
 			inp.close();
 			wb.close();
-			
+
 			SXSSFWorkbook swb = new SXSSFWorkbook(100);
 			Sheet sh = swb.createSheet("Sheet1");
 			String[] columnSheetStrings = allSheetString.toString().split(sheetColumnSplit);
@@ -134,14 +134,14 @@ public class DatasetsUtils {
 					}
 				}
 			}
-			
+
 			FileOutputStream out = new FileOutputStream(newExcelFile);
 			swb.write(out);
 			out.close();
 			swb.dispose();
 			swb.close();
 		} catch (IOException e) {
-			e.printStackTrace(e);
-		}
-	}
+            e.printStackTrace();
+        }
+    }
 }
