@@ -2,6 +2,7 @@ package com.java.common;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 
 public class DateUtils {
 
@@ -39,5 +40,13 @@ public class DateUtils {
         return LocalDate.parse(date).getDayOfWeek() == DayOfWeek.SATURDAY ||
                 LocalDate.parse(date).getDayOfWeek() == DayOfWeek.SUNDAY
                 ;
+    }
+    
+    public static String getLastDayOfMonth(String date) {
+    	return LocalDate.parse(date).with(TemporalAdjusters.lastDayOfMonth()).toString();
+    }
+    
+    public static String getFirstDayOfMonth(String date) {
+    	return LocalDate.parse(date).with(TemporalAdjusters.firstDayOfMonth()).toString();
     }
 }
