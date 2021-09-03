@@ -27,7 +27,7 @@ public class SeleniumUtils {
 
     }
 
-    static WebDriver initDriver(String browserType, String... driverPath){
+    public static WebDriver initDriver(String browserType, String... driverPath){
         if(browserType.equals("edge")) {
             if(driverPath.length != 0){
                 System.setProperty("webdriver.edge.driver", driverPath[0]);
