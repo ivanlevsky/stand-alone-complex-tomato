@@ -3,6 +3,8 @@ package com.java.common;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
+import java.time.Duration;
+import java.time.LocalTime;
 
 public class DateUtils {
 
@@ -49,4 +51,11 @@ public class DateUtils {
     public static String getFirstDayOfMonth(String date) {
     	return LocalDate.parse(date).with(TemporalAdjusters.firstDayOfMonth()).toString();
     }
+	
+	private static String betweenHours(String startTime, String endTime) {
+		Duration duration = Duration.between(LocalTime.parse(startTime),
+				LocalTime.parse(endTime));
+		return String.valueOf((float) (duration.toHoursPart() + 
+				(duration.toMinutesPart() + duration.toSecondsPart()/60.0)/60.0));
+	}
 }
