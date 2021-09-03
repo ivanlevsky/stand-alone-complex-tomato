@@ -2,18 +2,9 @@ package com.java.common;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 
 public class DateUtils {
-    public static void main(String[] args) {
-        String oldDate = "2021-08-25";
-		int calcDate = -10;
-        System.out.println(CalculateDate(oldDate, calcDate, false));
-        System.out.println(CalculateDate(oldDate, calcDate, true));
-		int calcDate2 = 10;
-        System.out.println(CalculateDate(oldDate, calcDate2, false));
-        System.out.println(CalculateDate(oldDate, calcDate2, true));
-		
-    }
 
     public static String CalculateDate(String date, int calcDate, boolean skipWeekends){
 		int passDays = 0;
@@ -49,5 +40,13 @@ public class DateUtils {
         return LocalDate.parse(date).getDayOfWeek() == DayOfWeek.SATURDAY ||
                 LocalDate.parse(date).getDayOfWeek() == DayOfWeek.SUNDAY
                 ;
+    }
+    
+    public static String getLastDayOfMonth(String date) {
+    	return LocalDate.parse(date).with(TemporalAdjusters.lastDayOfMonth()).toString();
+    }
+    
+    public static String getFirstDayOfMonth(String date) {
+    	return LocalDate.parse(date).with(TemporalAdjusters.firstDayOfMonth()).toString();
     }
 }
