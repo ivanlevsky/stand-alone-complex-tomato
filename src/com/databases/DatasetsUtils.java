@@ -112,7 +112,7 @@ public class DatasetsUtils {
 			StringBuilder allSheetString = new StringBuilder();
 			for (int i = 0; i < wb.getNumberOfSheets(); i++) {
 				tempSheet = wb.getSheetAt(i);
-				for (int j = 0; j < tempSheet.getLastRowNum(); j++) {
+				for (int j = 0; j <= tempSheet.getLastRowNum(); j++) {
 					allSheetString.append(tempSheet.getRow(j).getCell(0) + sheetRowSplit);
 				}
 				allSheetString.append(sheetColumnSplit);
