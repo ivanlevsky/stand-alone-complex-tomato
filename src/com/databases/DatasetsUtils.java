@@ -120,8 +120,9 @@ public class DatasetsUtils {
 			inp.close();
 			wb.close();
 
-			SXSSFWorkbook swb = new SXSSFWorkbook(100);
-			Sheet sh = swb.createSheet("Sheet1");
+			SXSSFWorkbook swb = new SXSSFWorkbook();
+			SXSSFSheet sh = swb.createSheet("Sheet1");
+			sh.setRandomAccessWindowSize(-1);
 			String[] columnSheetStrings = allSheetString.toString().split(sheetColumnSplit);
 			int tempRowNum = 0;
 			Row tempRow;
