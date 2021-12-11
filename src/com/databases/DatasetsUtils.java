@@ -112,7 +112,7 @@ public class DatasetsUtils {
 			StringBuilder allSheetString = new StringBuilder();
 			for (int i = 0; i < wb.getNumberOfSheets(); i++) {
 				tempSheet = wb.getSheetAt(i);
-				for (int j = 0; j < tempSheet.getLastRowNum(); j++) {
+				for (int j = 0; j <= tempSheet.getLastRowNum(); j++) {
 					allSheetString.append(tempSheet.getRow(j).getCell(0) + sheetRowSplit);
 				}
 				allSheetString.append(sheetColumnSplit);
@@ -120,8 +120,9 @@ public class DatasetsUtils {
 			inp.close();
 			wb.close();
 
-			SXSSFWorkbook swb = new SXSSFWorkbook(100);
-			Sheet sh = swb.createSheet("Sheet1");
+			SXSSFWorkbook swb = new SXSSFWorkbook();
+			SXSSFSheet sh = swb.createSheet("Sheet1");
+			sh.setRandomAccessWindowSize(-1);
 			String[] columnSheetStrings = allSheetString.toString().split(sheetColumnSplit);
 			int tempRowNum = 0;
 			Row tempRow;

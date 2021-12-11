@@ -190,6 +190,41 @@ public class SeleniumUtils {
         return driver.findElement(By.className(className));
     }
 
+	public static WebElement findElementByCssSelector(WebDriver driver, String cssSelector) {
+        return driver.findElement(By.cssSelector(cssSelector));
+    }
+    
+    public static WebElement getParentElement(WebDriver driver, String childElement) {
+        return (WebElement) ((JavascriptExecutor)driver).executeScript(
+        		"return arguments[0].parentNode;", childElement);
+    }
+      
+    public static WebElement getNextElement(WebDriver driver, String element) {
+        return (WebElement) ((JavascriptExecutor)driver).executeScript(
+        		"return arguments[0].nextSibling;", element);
+    }
+
+    public static WebElement getSingleChildElement(WebDriver driver, String parentElement) {
+        return (WebElement) ((JavascriptExecutor)driver).executeScript(
+        		"return arguments[0].childNodes[0];", parentElement);
+    }
+	
+    public static void selectListboxElement(WebDriver driver, String selectValue) {
+    	WebElement[] listboxes = (WebElement[]) ((JavascriptExecutor)driver).executeScript(
+    			"return document.querySelectorAll('ul')");
+    			
+       	for(WebElement lb : listboxes) {
+       		if(lb.getAttribute("text").contains(selectValue)) {
+       			WebElement[] lbc = (WebElement[]) ((JavascriptExecutor)driver).executeScript(
+       	        		"return arguments[0].childNodes;", lb);
+       			for(WebElement lbcc : lbc) {
+       				if(lbcc.getAttribute("text").equals(selectValue)) {
+       					lbcc.click();
+       				}
+       			}
+       		}
+       	}
+    }
 
     public static WebElement findElementsByXpath(WebDriver driver,String xpath){
         List<WebElement> elements = driver.findElements(By.xpath(xpath));
