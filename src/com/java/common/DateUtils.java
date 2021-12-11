@@ -32,7 +32,7 @@ public class DateUtils {
 					passDays += 1;
 				}
 			}
-			
+
 			calcDate += weekEndsCount;
 		}
         return LocalDate.parse(date).plusDays(calcDate).toString();
@@ -43,19 +43,19 @@ public class DateUtils {
                 LocalDate.parse(date).getDayOfWeek() == DayOfWeek.SUNDAY
                 ;
     }
-    
+
     public static String getLastDayOfMonth(String date) {
     	return LocalDate.parse(date).with(TemporalAdjusters.lastDayOfMonth()).toString();
     }
-    
+
     public static String getFirstDayOfMonth(String date) {
     	return LocalDate.parse(date).with(TemporalAdjusters.firstDayOfMonth()).toString();
     }
-	
+
 	private static String betweenHours(String startTime, String endTime) {
 		Duration duration = Duration.between(LocalTime.parse(startTime),
 				LocalTime.parse(endTime));
-		return String.valueOf((float) (duration.toHoursPart() + 
+		return String.valueOf((float) (duration.toHoursPart() +
 				(duration.toMinutesPart() + duration.toSecondsPart()/60.0)/60.0));
 	}
 }
