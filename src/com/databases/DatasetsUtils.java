@@ -46,7 +46,7 @@ public class DatasetsUtils {
                 Row row = sh.createRow(i);
                 for(int j = 0; j < colNum; j++){
                     Cell cell = row.createCell(j);
-                    cell.setCellValue(rowDatas[i].split(splitText)[j]);
+                    cell.setCellValue(rowDatas[i].split(splitText, -1)[j]);
                 }
             }
             FileOutputStream out = new FileOutputStream(excelFile);
