@@ -2,6 +2,8 @@ package com.databases;
 
 import com.google.common.io.Files;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -146,4 +148,36 @@ public class DatasetsUtils {
             e.printStackTrace();
         }
     }
+	
+	public static int[] getMergedCellRegionIndex(String excelFile, String sheetName, String cellContent){
+		int[] cellRegionIndex = new int[4];
+		try{
+			InputStream inp = new FileInputStream(excelFile);
+			Workbook wb = WorkbookFactory.create(inp);
+			Sheet sheet = wb.getSheet(sheetName);
+			int rows = sheet.getLastRowNum();
+			int startRow = 0;
+			int cols = sheet.getRow(0).getLastCellNum();
+			DataFormatter dataFormatter = new DataFormatter();
+			for (int i = startRow; i <= rows; i++){
+				for (int j = 0; j <= cols; j++){
+					if(dataFormatter.formatCellValue(sheet.getRow(i).getCell(j)).equals(cellContent)){
+						for(CellRangeAddress region : sheet.getMergedRegions()){
+							if(region.isInRange(sheet.getRow(i).getCell(j))){
+								cellRegionIndex[0] = region.getFirstColumn();
+								cellRegionIndex[1] = region.getLastColumn();
+								cellRegionIndex[2] = region.getFirstRow();
+								cellRegionIndex[3] = region.getLastRow();
+							}
+						}
+					}
+				}
+			}
+			inp.close();
+			wb.close();
+		} catch (IOException e){
+			e.printStackTrace();
+		}
+		return cellRegionIndex;
+	}
 }
