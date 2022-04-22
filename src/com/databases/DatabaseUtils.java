@@ -13,6 +13,7 @@ public class DatabaseUtils {
         StringBuilder sqlResult = new StringBuilder();
         HashMap<Integer,String> tableColumnType = new HashMap<>();
         String splitText = "S_P_L_I_T";
+		String lineSplit = "L_S_P_L_I_T";
         try {
 
             if(data.length > 0){
@@ -55,7 +56,7 @@ public class DatabaseUtils {
                         fields.append(splitText);
                     }
                 }
-                fields.append(System.lineSeparator());
+                fields.append(lineSplit);
                 sqlResult.append(fields);
                 while (rs.next()) {
                     for (int i = 1; i <= rsNum; i++) {
@@ -67,7 +68,7 @@ public class DatabaseUtils {
                             sqlResult.append(splitText);
                         }
                     }
-                    sqlResult.append(System.lineSeparator());
+                    sqlResult.append(lineSplit);
                 }
             }
             if (rs != null) {
