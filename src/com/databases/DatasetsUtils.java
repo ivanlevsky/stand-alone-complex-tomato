@@ -15,6 +15,7 @@ public class DatasetsUtils {
     private final static String splitText = "S_P_L_I_T";
 	private final static String sheetRowSplit = "R_S_P_L_I_T";
 	private final static String sheetColumnSplit = "C_S_P_L_I_T";
+	private final static String lineSplit = "L_S_P_L_I_T";
 
     public static void writeCSV(String csvFilePath, String data, boolean appendWrite){
         File csvFile = new File(csvFilePath);
@@ -41,7 +42,7 @@ public class DatasetsUtils {
                 wb = new SXSSFWorkbook(100);
             }
             Sheet sh = wb.createSheet(sheetName);
-            String[] rowDatas =data.split(System.lineSeparator());
+            String[] rowDatas =data.split(lineSplit);
             int rowNum = rowDatas.length;
             int colNum = rowDatas[0].split(splitText).length;
             for(int i = 0; i < rowNum; i++){
