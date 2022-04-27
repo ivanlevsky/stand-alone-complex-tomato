@@ -101,7 +101,7 @@ public class SeleniumUtils {
 
     public static void saveScreenShot(WebDriver driver, String imagePath, String imageName){
         try {
-            File file = new File(imagePath + imageName);
+            File file = new File(imagePath + imageName + ".png");
             if(!file.exists()){
                 file.createNewFile();
             }
