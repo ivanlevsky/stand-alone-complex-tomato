@@ -193,7 +193,13 @@ public class SeleniumUtils {
 	public static WebElement findElementByCssSelector(WebDriver driver, String cssSelector) {
         return driver.findElement(By.cssSelector(cssSelector));
     }
-    
+
+    @SuppressWarnings("unchecked")
+	public static ArrayList<WebElement> getElementsBySelector(WebDriver driver, String selector){
+		return (ArrayList<WebElement>) ((JavascriptExecutor)driver).executeScript(
+				"return document.querySelectorAll(\"" + selector + "\")");
+    }
+
     public static WebElement getParentElement(WebDriver driver, String childElement) {
         return (WebElement) ((JavascriptExecutor)driver).executeScript(
         		"return arguments[0].parentNode;", childElement);
