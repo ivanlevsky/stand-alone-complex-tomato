@@ -200,19 +200,25 @@ public class SeleniumUtils {
 				"return document.querySelectorAll(\"" + selector + "\")");
     }
 
-    public static WebElement getParentElement(WebDriver driver, String childElement) {
+    public static WebElement getParentElement(WebDriver driver, WebElement childElement) {
         return (WebElement) ((JavascriptExecutor)driver).executeScript(
-        		"return arguments[0].parentNode;", childElement);
+                "return arguments[0].parentNode", childElement);
     }
       
-    public static WebElement getNextElement(WebDriver driver, String element) {
+    public static WebElement getNextElement(WebDriver driver, WebElement element) {
         return (WebElement) ((JavascriptExecutor)driver).executeScript(
-        		"return arguments[0].nextSibling;", element);
+                "return arguments[0].nextSibling", element);
     }
 
-    public static WebElement getSingleChildElement(WebDriver driver, String parentElement) {
+    public static WebElement getSingleChildElement(WebDriver driver, WebElement parentElement) {
         return (WebElement) ((JavascriptExecutor)driver).executeScript(
-        		"return arguments[0].childNodes[0];", parentElement);
+                "return arguments[0].childNodes[0]", parentElement);
+    }
+
+	@SuppressWarnings("unchecked")
+    public static ArrayList<WebElement> getAllChildrenElement(WebDriver driver, WebElement parentElement) {
+        return (WebElement) ((JavascriptExecutor)driver).executeScript(
+                "return arguments[0].childNodes", parentElement);
     }
 	
     public static void selectListboxElement(WebDriver driver, String selectValue) {
