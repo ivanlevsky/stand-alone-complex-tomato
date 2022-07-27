@@ -58,13 +58,7 @@ public class DateUtils {
 		return String.valueOf((float) (duration.toHoursPart() +
 				(duration.toMinutesPart() + duration.toSecondsPart()/60.0)/60.0));
 	}
-	
-	private static String getLastDayOfMonth(String date) {
-		return LocalDate.from(
-				LocalDate.parse(date)
-				).with(TemporalAdjusters.lastDayOfMonth()).toString();
-	}
-		
+
 	private static String getLastDayOfLastMonth(String date) {
 		return LocalDate.from(
 				LocalDate.parse(date)
