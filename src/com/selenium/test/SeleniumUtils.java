@@ -204,7 +204,7 @@ public class SeleniumUtils {
         return (WebElement) ((JavascriptExecutor)driver).executeScript(
                 "return arguments[0].parentNode", childElement);
     }
-      
+
     public static WebElement getNextElement(WebDriver driver, WebElement element) {
         return (WebElement) ((JavascriptExecutor)driver).executeScript(
                 "return arguments[0].nextSibling", element);
@@ -217,14 +217,14 @@ public class SeleniumUtils {
 
 	@SuppressWarnings("unchecked")
     public static ArrayList<WebElement> getAllChildrenElement(WebDriver driver, WebElement parentElement) {
-        return (WebElement) ((JavascriptExecutor)driver).executeScript(
+        return (ArrayList<WebElement>) ((JavascriptExecutor)driver).executeScript(
                 "return arguments[0].childNodes", parentElement);
     }
-	
+
     public static void selectListboxElement(WebDriver driver, String selectValue) {
     	WebElement[] listboxes = (WebElement[]) ((JavascriptExecutor)driver).executeScript(
     			"return document.querySelectorAll('ul')");
-    			
+
        	for(WebElement lb : listboxes) {
        		if(lb.getAttribute("text").contains(selectValue)) {
        			WebElement[] lbc = (WebElement[]) ((JavascriptExecutor)driver).executeScript(
