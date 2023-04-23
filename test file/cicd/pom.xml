@@ -16,6 +16,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit4</artifactId>
+            <version>LATEST_VERSION</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>30.1.1-jre</version>
@@ -200,6 +206,11 @@
                         <artifactId>jcommander</artifactId>
                         <version>1.81</version>
                     </dependency>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
                 </dependencies>
                 <configuration>
 <!--                    <test>JUnit5Tests</test>-->
@@ -207,6 +218,18 @@
                         <include>**/AllJunitTests.java</include>
                         <include>**/AllTestNGTests.java</include>
                     </includes>
+                    
+                         
+                    <testFailureIgnore>false</testFailureIgnore>
+                    <argLine>
+                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
+                    <properties>
+                         <property>
+                            <name>listener</name>
+                            <value>io.qameta.allure.junit4.AllureJunit4</value>
+                         </property>
+                    </properties>
                 </configuration>
             </plugin>
         </plugins>
