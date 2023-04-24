@@ -92,55 +92,55 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.9.1</version>
+            <version>5.8.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.9.1</version>
+            <version>5.8.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
-            <version>5.9.1</version>
+            <version>5.8.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.9.1</version>
+            <version>5.8.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-launcher</artifactId>
-            <version>1.9.1</version>
+            <version>1.8.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-runner</artifactId>
-            <version>1.9.1</version>
+            <version>1.8.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-engine</artifactId>
-            <version>1.9.1</version>
+            <version>1.8.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-suite-api</artifactId>
-            <version>1.9.1</version>
+            <version>1.8.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-commons</artifactId>
-            <version>1.9.1</version>
+            <version>1.8.0</version>
         </dependency>
         <dependency>
             <groupId>org.apiguardian</groupId>
@@ -223,11 +223,23 @@
                         <artifactId>aspectjweaver</artifactId>
                         <version>1.9.19</version>
                     </dependency>
-                    <dependency>
+                         
+<!--                     <dependency>
                       <groupId>org.apache.maven.surefire</groupId>
                       <artifactId>surefire-junit-platform</artifactId>
                       <version>3.0.0</version>
                    </dependency>
+                          -->
+                      <dependency>
+                       <groupId>org.junit.jupiter</groupId>
+                       <artifactId>junit-jupiter-engine</artifactId>
+                       <version>5.8.2</version>
+                     </dependency>
+                     <dependency>
+                       <groupId>org.junit.platform</groupId>
+                       <artifactId>junit-platform-suite</artifactId>
+                       <version>1.8.2</version>
+                     </dependency>  
                 </dependencies>
                 <configuration>
                     <test>AllJunitTests</test>
@@ -246,12 +258,12 @@
                            <value>io.qameta.allure.junit5.AllureJunit5</value>
                        </property>
                     </properties>
-                    <systemProperties>
+<!--                     <systemProperties>
                         <property>
                             <name>junit.jupiter.extensions.autodetection.enabled</name>
                             <value>true</value>
                         </property>
-                    </systemProperties>
+                    </systemProperties> -->
                 </configuration>
             </plugin>
             <plugin>
