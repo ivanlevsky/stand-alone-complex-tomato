@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+import io.qameta.allure.Description;
 class StringUtilsTest extends StringUtils {
     private String textToSplit1;
     private String textToSplit2;
@@ -21,6 +21,7 @@ class StringUtilsTest extends StringUtils {
     }
 
     @Test
+    @Description("Some detailed test description")
     void testSplitStringByRegex() {
         assertAll("textSplit",
                 () -> assertArrayEquals(textGroup1, splitStringByRegex("123",textToSplit1)),
