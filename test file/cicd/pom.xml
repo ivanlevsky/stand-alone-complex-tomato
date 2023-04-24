@@ -223,11 +223,11 @@
                         <artifactId>aspectjweaver</artifactId>
                         <version>1.9.19</version>
                     </dependency>
-                    <dependency>
+<!--                     <dependency>
                         <groupId>org.junit.platform</groupId>
                         <artifactId>junit-platform-surefire-provider</artifactId>
                         <version>1.3.2</version>
-                    </dependency>
+                    </dependency> -->
                 </dependencies>
                 <configuration>
 <!--                    <test>JUnit5Tests</test>-->
