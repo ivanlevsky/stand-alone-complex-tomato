@@ -11,7 +11,8 @@ import org.junit.runner.RunWith;
  * //select package: @SelectPackages("com.junit.test")
  * //exclude class endwith "WindowsOsUtilsTest": @ExcludeClassNamePatterns({"^.*WindowsOsUtilsTest?$"})
  */
-@RunWith(JUnitPlatform.class)
+// @RunWith(JUnitPlatform.class)  -> junit4
+@Suite
 @SuiteDisplayName("JUnit Platform Suite Demo")
 @SelectPackages("com.junit.test")
 public class AllJunitTests {
