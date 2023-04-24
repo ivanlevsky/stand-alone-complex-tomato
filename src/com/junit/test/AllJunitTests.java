@@ -13,7 +13,7 @@ import org.junit.platform.suite.api.Suite;
  * //exclude class endwith "WindowsOsUtilsTest": @ExcludeClassNamePatterns({"^.*WindowsOsUtilsTest?$"})
  */
 // @RunWith(JUnitPlatform.class)  -> junit4
-@Suite
+@RunWith(Suite.class)
 @SuiteDisplayName("JUnit Platform Suite Demo")
 @SelectPackages("com.junit.test")
 public class AllJunitTests {
