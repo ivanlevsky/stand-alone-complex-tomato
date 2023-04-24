@@ -240,12 +240,12 @@
                     <argLine>
                          -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.19/aspectjweaver-1.9.19.jar"
                     </argLine>
-                    <systemProperties>
+                    <SystemPropertyVariables>
                         <property>
                             <name>junit.jupiter.extensions.autodetection.enabled</name>
                             <value>true</value>
                         </property>
-                    </systemProperties>
+                    </SystemPropertyVariables>
                 </configuration>
             </plugin>
             <plugin>
