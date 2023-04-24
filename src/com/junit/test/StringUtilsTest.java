@@ -5,13 +5,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-// import io.qameta.allure.Description;
-// import io.qameta.allure.Epic;
-// import io.qameta.allure.Feature;
-// import io.qameta.allure.Story;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 
-// @Epic("Login Tests Epic")
-// @Feature("Invalid Login Features")
+@Epic("Login Tests Epic")
+@Feature("Invalid Login Features")
 class StringUtilsTest extends StringUtils {
     private String textToSplit1;
     private String textToSplit2;
@@ -27,8 +27,8 @@ class StringUtilsTest extends StringUtils {
     }
 
     @Test
-//     @Story("This is a Fail Story.")
-//     @Description("This is a Fail Story Description.")
+    @Story("This is a Fail Story.")
+    @Description("This is a Fail Story Description.")
     void testSplitStringByRegex() {
         assertAll("textSplit",
                 () -> assertArrayEquals(textGroup1, splitStringByRegex("123",textToSplit1)),
