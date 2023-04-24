@@ -16,11 +16,6 @@
     </properties>
 
     <dependencies>
-         <dependency>
-             <groupId>org.apache.maven.surefire</groupId>
-             <artifactId>surefire-junit-platform</artifactId>
-             <version>3.0.0</version>
-         </dependency>
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-suite-engine</artifactId>
@@ -234,6 +229,11 @@
                         <artifactId>aspectjweaver</artifactId>
                         <version>1.9.19</version>
                     </dependency>
+                    <dependency>
+                      <groupId>org.apache.maven.surefire</groupId>
+                      <artifactId>surefire-junit-platform</artifactId>
+                      <version>3.0.0</version>
+                   </dependency>
                 </dependencies>
                 <configuration>
 <!--                     <test>JUnit5Tests</test> -->
