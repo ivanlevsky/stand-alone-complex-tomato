@@ -261,10 +261,9 @@
 <!--                         <include>**/AllTestNGTests.java</include>
                     </includes> -->
                     <testFailureIgnore>false</testFailureIgnore>
-                    <argLine>
+<!--                     <argLine>
                          -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.19/aspectjweaver-1.9.19.jar"
-                    </argLine>
-<!--                     <linkXRef>false</linkXRef> -->
+                    </argLine> -->
                     <suiteXmlFiles>
                       <suiteXmlFile>testng.xml</suiteXmlFile>  
                     </suiteXmlFiles>
