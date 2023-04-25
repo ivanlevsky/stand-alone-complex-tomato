@@ -217,10 +217,10 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
                 <configuration >
-                    <excludes>
+<!--                     <excludes>
                         <exclude>**/junit/test/**.java</exclude>
                         <exclude>**/testng/test/**.java</exclude>
-                    </excludes>
+                    </excludes> -->
 <!--                     <testExcludes>
                         <testExclude>**/testng/test/**.java</testExclude>
                     </testExcludes> -->
