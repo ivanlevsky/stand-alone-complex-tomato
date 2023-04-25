@@ -265,23 +265,23 @@
 
                      
                 <configuration>
-<!--  testng not use include   -->
+<!--  testng can use suiteXmlFiles to replace -->
 <!--                     <includes> -->
 <!--                         <include>**/AllJunitTests.java</include> -->
 <!--                         <include>**/AllTestNGTests.java</include>
                     </includes> -->
-<!--  testng not use include   -->
+<!--  testng can use suiteXmlFiles to replace   -->
                          
                     <testFailureIgnore>false</testFailureIgnore>
                     <argLine>
                          -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.19/aspectjweaver-1.9.19.jar"
                     </argLine>
                          
-                    <!-- testng suite config testng.xml path,default in project root -->
-                    <suiteXmlFiles>
+                    <!-- testng suite config testng.xml path,default in project root, use this when includes tag not used -->
+<!--                     <suiteXmlFiles>
                       <suiteXmlFile>testng.xml</suiteXmlFile>  
-                    </suiteXmlFiles>
-                     <!-- testng suite config testng.xml path,default in project root -->
+                    </suiteXmlFiles> -->
+                     <!-- testng suite config testng.xml path,default in project root, use this when includes tag not used -->
                          
                          
 <!--  user for junit  <systemProperties>
