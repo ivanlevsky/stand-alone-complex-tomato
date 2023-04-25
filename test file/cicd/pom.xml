@@ -210,7 +210,7 @@
 
     <build>
         <sourceDirectory>src/com</sourceDirectory>
-        <testSourceDirectory>src/com/junit/test</testSourceDirectory>
+        <testSourceDirectory>src/com/testng/test</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
