@@ -270,7 +270,6 @@
                          -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.19/aspectjweaver-1.9.19.jar"
                     </argLine>
                     <suiteXmlFiles>
-                       <! -- testng.xml所在的路径，这里指的是相对路径 -- !>
                       <suiteXmlFile>testng.xml</suiteXmlFile>  
                     </suiteXmlFiles>
                          
