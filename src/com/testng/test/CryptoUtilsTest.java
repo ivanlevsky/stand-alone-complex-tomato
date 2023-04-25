@@ -12,7 +12,7 @@ import static org.testng.Assert.*;
 public class CryptoUtilsTest extends CryptoUtils {
     private String filePath;
 
-    @BeforeMethod
+    @BeforeMethod(description = "before")
     public void setUp() {
         filePath = System.getProperty("user.dir") + "\\LICENSE";
     }
@@ -21,7 +21,7 @@ public class CryptoUtilsTest extends CryptoUtils {
     public void tearDown() {
     }
 
-    @Test
+    @Test(description = "Human-readable test name")
     @Ignore
     public void testEncode() {
         System.out.println("skip this test");
