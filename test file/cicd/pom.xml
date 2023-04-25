@@ -261,7 +261,6 @@
 
                      
                 <configuration>
-                   <test>**/AllTestNGTests.java</test>
                     <includes>
 <!--                         <include>**/AllJunitTests.java</include> -->
                         <include>**/AllTestNGTests.java</include>
@@ -270,7 +269,10 @@
                     <argLine>
                          -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.19/aspectjweaver-1.9.19.jar"
                     </argLine>
-                    <useSystemClassLoader>false</useSystemClassLoader>   
+                    <suiteXmlFiles>
+                       <! -- testng.xml所在的路径，这里指的是相对路径 -- !>
+                      <suiteXmlFile>testng.xml</suiteXmlFile>  
+                    </suiteXmlFiles>
                          
 <!--                     <systemProperties>
                         <property>
