@@ -261,7 +261,7 @@
 
                      
                 <configuration>
-<!--                    <test>JUnit5Tests</test>-->
+                   <test>**/AllTestNGTests.java</test>
                     <includes>
 <!--                         <include>**/AllJunitTests.java</include> -->
                         <include>**/AllTestNGTests.java</include>
