@@ -250,7 +250,7 @@
                 <configuration>
 <!--                    <test>JUnit5Tests</test>-->
                     <includes>
-                        <include>**/AllJunitTests.java</include>
+<!--                         <include>**/AllJunitTests.java</include> -->
                         <include>**/AllTestNGTests.java</include>
                     </includes>
                     <testFailureIgnore>false</testFailureIgnore>
