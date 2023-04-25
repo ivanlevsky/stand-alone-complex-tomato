@@ -18,6 +18,12 @@
     <dependencies>
         <dependency>
             <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>2.21.0</version>
+            <scope>test</scope>
+        </dependency>
+<!--         <dependency>
+            <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit5</artifactId>
             <version>2.21.0</version>
             <scope>test</scope>
@@ -27,7 +33,7 @@
             <artifactId>allure-junit4</artifactId>
             <version>2.21.0</version>
             <scope>test</scope>
-        </dependency>
+        </dependency> -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-reload4j</artifactId>
@@ -236,11 +242,11 @@
                         <version>1.9.19</version>
                     </dependency>
                 </dependencies>
-                <dependency>
+<!--                 <dependency>
                         <groupId>org.junit.platform</groupId>
                         <artifactId>junit-platform-surefire-provider</artifactId>
                         <version>1.2.0</version>
-                    </dependency>
+                    </dependency> -->
                 <configuration>
 <!--                    <test>JUnit5Tests</test>-->
                     <includes>
@@ -251,12 +257,12 @@
                     <argLine>
                          -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.19/aspectjweaver-1.9.19.jar"
                     </argLine>
-                    <systemProperties>
+<!--                     <systemProperties>
                         <property>
                             <name>junit.jupiter.extensions.autodetection.enabled</name>
                             <value>true</value>
                         </property>
-                    </systemProperties>
+                    </systemProperties> -->
 <!--                     <properties>
                          <property>
                             <name>listener</name>
