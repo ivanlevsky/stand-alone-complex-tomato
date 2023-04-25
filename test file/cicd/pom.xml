@@ -219,11 +219,11 @@
                 <configuration >
                     <excludes>
                         <exclude>**/junit/test/**.java</exclude>
-<!--                         <exclude>**/testng/test/**.java</exclude> -->
+                        <exclude>**/testng/test/**.java</exclude>
                     </excludes>
-<!--                     <testExcludes>
+                    <testExcludes>
                         <testExclude>**/testng/test/**.java</testExclude>
-                    </testExcludes> -->
+                    </testExcludes>
                 </configuration>
             </plugin>
             <plugin>
