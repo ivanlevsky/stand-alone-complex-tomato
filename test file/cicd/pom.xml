@@ -16,19 +16,22 @@
     </properties>
 
     <dependencies>
+        <!--testng allure -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>7.7.1</version>
             <scope>test</scope>
         </dependency>
+        <!--testng allure -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
             <version>2.21.0</version>
             <scope>test</scope>
         </dependency>
-<!--         <dependency>
+        <!--junit allure -->
+        <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit5</artifactId>
             <version>2.21.0</version>
@@ -39,7 +42,8 @@
             <artifactId>allure-junit4</artifactId>
             <version>2.21.0</version>
             <scope>test</scope>
-        </dependency> -->
+        </dependency>
+        <!--junit allure -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-reload4j</artifactId>
@@ -210,8 +214,10 @@
 
     <build>
         <sourceDirectory>src/com</sourceDirectory>
-<!--         <testSourceDirectory>src/com/junit/test</testSourceDirectory> -->
+        <!--change path-->
+        <!-- <testSourceDirectory>src/com/junit/test</testSourceDirectory> -->
         <testSourceDirectory>src/com/testng/test</testSourceDirectory>
+        <!--change path-->
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -232,12 +238,14 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.12.4</version>
                 <dependencies>
+<!--       no more use                    -->
 <!--                     <dependency>
                         <groupId>org.testng</groupId>
                         <artifactId>testng</artifactId>
                         <version>7.3.0</version>
                        <scope>test</scope>
                     </dependency> -->
+<!--       no more use                    -->                     
                     <dependency>
                         <groupId>com.beust</groupId>
                         <artifactId>jcommander</artifactId>
@@ -257,30 +265,39 @@
 
                      
                 <configuration>
+<!--  testng not use include   -->
 <!--                     <includes> -->
 <!--                         <include>**/AllJunitTests.java</include> -->
 <!--                         <include>**/AllTestNGTests.java</include>
                     </includes> -->
+<!--  testng not use include   -->
+                         
                     <testFailureIgnore>false</testFailureIgnore>
                     <argLine>
                          -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.19/aspectjweaver-1.9.19.jar"
                     </argLine>
+                         
+                    <!-- testng suite config testng.xml path,default in project root -->
                     <suiteXmlFiles>
                       <suiteXmlFile>testng.xml</suiteXmlFile>  
                     </suiteXmlFiles>
+                     <!-- testng suite config testng.xml path,default in project root -->
                          
-<!--                     <systemProperties>
+                         
+<!--  user for junit  <systemProperties>
                         <property>
                             <name>junit.jupiter.extensions.autodetection.enabled</name>
                             <value>true</value>
                         </property>
                     </systemProperties> -->
-<!--                     <properties>
+<!--   user for junit 4 <properties>
                          <property>
                             <name>listener</name>
                             <value>io.qameta.allure.junit4.AllureJunit4</value>
                          </property>
                     </properties> -->
+                         
+                         
                 </configuration>
             </plugin>
             <plugin>
