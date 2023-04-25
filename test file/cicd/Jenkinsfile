@@ -8,7 +8,7 @@ pipeline {
 		// Install the Maven version configured as "M3" and add it to the path.
 		maven "M3"
 	}
-    stages {
+        stages {
 		stage('Git Checkout') {
 			steps {
 				checkout([
@@ -19,38 +19,44 @@ pipeline {
 					userRemoteConfigs: [
 						[
 						    //https git clone
-                            //url: 'https://github.com/ivanlevsky/stand-alone-complex-tomato.git'
+						    //url: 'https://github.com/ivanlevsky/stand-alone-complex-tomato.git'
 
-                            //ssh git clone
-                            credentialsId: 'jenkins-ssh-key',
-                            url: 'git@github.com:ivanlevsky/stand-alone-complex-tomato.git'
+						    //ssh git clone
+						    credentialsId: 'jenkins-ssh-key',
+						    url: 'git@github.com:ivanlevsky/stand-alone-complex-tomato.git'
 						]
 					]
 				])
 			}
 		}
 
-        stage('Build Project') {
-            steps {
-                sh 'cp ./test\\ file/cicd/pom.xml  ./'
-				sh 'mvn -B -DskipTests clean package'
-            }
-        }
+		stage('Build Project') {
+		    steps {
+			sh 'cp ./test\\ file/cicd/pom.xml  ./'
+			sh 'cp ./test\\ file/cicd/testng.xml  ./'
+			sh 'mvn -B -DskipTests clean package'
+		    }
+		}
 
 		stage('Test') {
 			steps {
-				sh 'mvn test'
-				allure([
-				    includeProperties: false,
-				    jdk: '',
-				    properties: [],
-				    reportBuildPolicy: 'ALWAYS',
-				    results: [[path: 'target/allure-results']]
-				])
+				sh 'mvn clean test'
 			}
 			post {
 				always {
 					junit 'target/surefire-reports/*.xml'
+					xunit (
+						thresholds: [ skipped(failureThreshold: '0'), failed(failureThreshold: '0') ],
+						tools: [ JUnit(pattern: 'target/surefire-reports/TEST-*.xml') ]
+					)
+					testNG(reportFilenamePattern: 'target/surefire-reports/*.xml')
+					allure([
+					    includeProperties: false,
+					    jdk: '',
+					    properties: [],
+					    reportBuildPolicy: 'ALWAYS',
+					    results: [[path: 'target/allure-results']]
+					])
 				}
 				success {
 					echo 'I succeeded!'
