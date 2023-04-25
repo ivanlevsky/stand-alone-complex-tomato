@@ -252,11 +252,6 @@
                         <artifactId>surefire-testng</artifactId>
                         <version>2.12.4</version>
                      </dependency>     
-                     <!--                 <dependency>
-                        <groupId>org.junit.platform</groupId>
-                        <artifactId>junit-platform-surefire-provider</artifactId>
-                        <version>1.2.0</version>
-                    </dependency> -->
                 </dependencies>
 
                      
@@ -270,7 +265,7 @@
                          -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.19/aspectjweaver-1.9.19.jar"
                     </argLine>
                     <suiteXmlFiles>
-                      <suiteXmlFile>**/testng1.xml</suiteXmlFile>  
+                      <suiteXmlFile>testng.xml</suiteXmlFile>  
                     </suiteXmlFiles>
                          
 <!--                     <systemProperties>
