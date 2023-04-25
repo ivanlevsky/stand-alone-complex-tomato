@@ -265,7 +265,7 @@
                          -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.19/aspectjweaver-1.9.19.jar"
                     </argLine>
                     <suiteXmlFiles>
-                      <suiteXmlFile>testng.xml</suiteXmlFile>  
+                      <suiteXmlFile>src/testng.xml</suiteXmlFile>  
                     </suiteXmlFiles>
                          
 <!--                     <systemProperties>
