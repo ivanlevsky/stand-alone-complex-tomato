@@ -6,13 +6,13 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
+import io.qameta.allure.Description;
 import static org.testng.Assert.*;
 
 public class CryptoUtilsTest extends CryptoUtils {
     private String filePath;
 
-    @BeforeMethod(description = "before")
+    @BeforeMethod
     public void setUp() {
         filePath = System.getProperty("user.dir") + "\\LICENSE";
     }
@@ -21,7 +21,8 @@ public class CryptoUtilsTest extends CryptoUtils {
     public void tearDown() {
     }
 
-    @Test(description = "Human-readable test name")
+    @Test
+    @Description("Human-readable test name")
     @Ignore
     public void testEncode() {
         System.out.println("skip this test");
