@@ -256,14 +256,15 @@
 
                      
                 <configuration>
-                    <includes>
+<!--                     <includes> -->
 <!--                         <include>**/AllJunitTests.java</include> -->
-                        <include>**/AllTestNGTests.java</include>
-                    </includes>
+<!--                         <include>**/AllTestNGTests.java</include>
+                    </includes> -->
                     <testFailureIgnore>false</testFailureIgnore>
                     <argLine>
                          -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.19/aspectjweaver-1.9.19.jar"
                     </argLine>
+                    <linkXRef>false</linkXRef>
                     <suiteXmlFiles>
                       <suiteXmlFile>testng.xml</suiteXmlFile>  
                     </suiteXmlFiles>
