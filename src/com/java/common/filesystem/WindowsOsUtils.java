@@ -113,10 +113,13 @@ public class WindowsOsUtils {
         StringBuilder output = new StringBuilder();
         String outputText = "";
         ProcessBuilder processBuilder = new ProcessBuilder();
-        if(shellCmd.contains("powershell")){
+        if(shellCmd.equals("powershell")){
             executeCmd = executeCmd + "\r\n";
-        }
-        processBuilder.command("cmd","/c", shellCmd);
+	    processBuilder.command("cmd","/c", shellCmd);
+        }else if(shellCmd.equals("sh")){
+	    processBuilder.command("bash","-c", shellCmd);
+	}
+        
 
         try {
             String line;
