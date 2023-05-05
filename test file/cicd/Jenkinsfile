@@ -1,8 +1,13 @@
 pipeline {
-    agent any
+    	agent any
+	
 	options {
+		// parallelsAlwaysFailFast()
 		// Keep the 10 most recent builds
 		buildDiscarder(logRotator(numToKeepStr:'10'))
+	}
+	environment {
+		GIT_URL = 'git@github.com:ivanlevsky/stand-alone-complex-tomato.git'
 	}
 	tools {
 		// Install the Maven version configured as "M3" and add it to the path.
@@ -15,6 +20,9 @@ pipeline {
 					$class: 'GitSCM',
 					branches: [[name: '*/master']],
 					extensions: [
+						// [$class: 'SparseCheckoutPaths', sparseCheckoutPaths:[[path:'src/']]],
+						// [$class: 'RelativeTargetDirectory', relativeTargetDir:'test_folder']
+                    ],
 					],
 					userRemoteConfigs: [
 						[
@@ -23,7 +31,7 @@ pipeline {
 
 						    //ssh git clone
 						    credentialsId: 'jenkins-ssh-key',
-						    url: 'git@github.com:ivanlevsky/stand-alone-complex-tomato.git'
+						    url: "$GIT_URL"
 						]
 					]
 				])
