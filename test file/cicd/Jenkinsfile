@@ -38,6 +38,19 @@ pipeline {
 			}
 		}
 
+		stage('continue run build when time past 12.am'){
+		    steps{
+			timeout(time: 1, unit: 'MINUTES') {
+			    	waitUntil(initialRecurrencePeriod: 15000, queit: false) {
+					script {
+						def current_time = sh(script: 'date +"%H%M%S"', returnStdout: true).trim()
+						return Integer.valueOf("$current_time") > 120000
+					}
+				}
+			}
+		    }
+		}
+		
 		stage('Build Project') {
 		    steps {
 			sh 'cp ./test\\ file/cicd/pom.xml  ./'
