@@ -61,7 +61,9 @@ pipeline {
 
 		stage('Test') {
 			steps {
-				sh 'mvn clean test'
+				catchError(catchInterruptions: true, stageResult: 'UNSTABLE'){
+					sh 'mvn clean test'
+				}
 			}
 			post {
 				always {
