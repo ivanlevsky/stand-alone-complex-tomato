@@ -35,4 +35,34 @@ public class WordUtils {
 
         write_document.write(out);
     }
+    private static String getWordHighlightText(String wordFilePath) {
+			String highlightText = "";
+			FileInputStream fis = null;
+			XWPFDocument doc = null; 
+			try {
+				fis = new FileInputStream(wordFilePath);
+				doc = new XWPFDocument(fis); 
+				for (XWPFParagraph paragraph : doc.getParagraphs()) {  
+				    for (XWPFRun run : paragraph.getRuns()) {  
+				        if (run.isHighlighted()) {
+				        	highlightText += run.getText(0) + System.lineSeparator();
+				        }
+				    }  
+				}  
+				fis.close();  
+				doc.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					fis.close();  
+					doc.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			return highlightText;
+	}  
 }
