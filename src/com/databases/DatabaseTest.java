@@ -18,13 +18,13 @@ public class DatabaseTest {
         String querySql = "select * from movie";
         Connection con = DatabaseUtils.connectToDatabases(GlobalParams.mariaDbUrl,
                 GlobalParams.mariaDbUser,GlobalParams.mariaDbPassword);
-        String mariaDBRowValues = DatabaseUtils.executeSql(con, querySql, true);
+        String mariaDBRowValues = DatabaseUtils.executeSql(con, querySql, true, true);
         DatasetsUtils.writeExcel(GlobalParams.excelDatasets, "movieMaria", mariaDBRowValues, false);
         DatasetsUtils.writeCSV(GlobalParams.csvDatasets,mariaDBRowValues,true);
 
         con = DatabaseUtils.connectToDatabases(GlobalParams.pgsqlUrl,
                 GlobalParams.pgsqlUser,GlobalParams.pgsqlPassword);
-        String pgsqlRowValues = DatabaseUtils.executeSql(con, querySql, true);
+        String pgsqlRowValues = DatabaseUtils.executeSql(con, querySql, true, true);
         DatasetsUtils.writeExcel(GlobalParams.excelDatasets, "moviePg", pgsqlRowValues, true);
         try {
             con.close();
@@ -40,11 +40,11 @@ public class DatabaseTest {
         ArrayList<String> data = DatasetsUtils.readExcel(GlobalParams.excelDatasets, "movie", true, null);
         Connection con = DatabaseUtils.connectToDatabases(GlobalParams.mariaDbUrl,
                 GlobalParams.mariaDbUser,GlobalParams.mariaDbPassword);
-        DatabaseUtils.executeSql(con, insertManySql, false, data);
+        DatabaseUtils.executeSql(con, insertManySql, false, true, data);
 
         con = DatabaseUtils.connectToDatabases(GlobalParams.pgsqlUrl,
                 GlobalParams.pgsqlUser,GlobalParams.pgsqlPassword);
-        DatabaseUtils.executeSql(con, insertManySql, false, data);
+        DatabaseUtils.executeSql(con, insertManySql, false, true, data);
 
         try {
             con.close();
@@ -72,11 +72,11 @@ public class DatabaseTest {
 
         Connection con = DatabaseUtils.connectToDatabases(GlobalParams.mariaDbUrl,
                 GlobalParams.mariaDbUser,GlobalParams.mariaDbPassword);
-        DatabaseUtils.executeSql(con, createTableSql, false);
+        DatabaseUtils.executeSql(con, createTableSql, false, true);
 
         con = DatabaseUtils.connectToDatabases(GlobalParams.pgsqlUrl,
                 GlobalParams.pgsqlUser,GlobalParams.pgsqlPassword);
-        DatabaseUtils.executeSql(con, createTableSql,false);
+        DatabaseUtils.executeSql(con, createTableSql,false, true);
         try {
             con.close();
         } catch (SQLException e) {

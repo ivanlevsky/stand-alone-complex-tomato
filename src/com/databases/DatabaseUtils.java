@@ -7,7 +7,7 @@ import java.util.Properties;
 
 public class DatabaseUtils {
 
-    public static String executeSql(Connection con, String sql, boolean getResult, ArrayList<String>... data){
+    public static String executeSql(Connection con, String sql, boolean getResult, boolean getHeader, ArrayList<String>... data){
         PreparedStatement pstmt;
         ResultSet rs;
         StringBuilder sqlResult = new StringBuilder();
@@ -57,7 +57,9 @@ public class DatabaseUtils {
                     }
                 }
                 fields.append(lineSplit);
-                sqlResult.append(fields);
+				if(getHeader) {
+					sqlResult.append(fields);
+				}
                 while (rs.next()) {
                     for (int i = 1; i <= rsNum; i++) {
                         if (rs.getObject(i) != null) {
